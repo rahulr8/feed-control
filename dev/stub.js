@@ -3,7 +3,7 @@ import { DEFAULTS, classify, pageFilters, topicId, withBuiltins } from '../lib.j
 
 const store = {
   sync: { filters: [...DEFAULTS.filters, ...['Sports', 'Trump', 'influencers', 'claude code'].map(label => ({ id: topicId(label), label, on: label !== 'influencers' }))] },
-  local: location.search.includes('configured') ? { keys: { openrouter: 'demo' } } : {}, // ?configured: store screenshots
+  local: {},
   session: {},
 }
 const listeners = []

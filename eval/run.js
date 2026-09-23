@@ -1,16 +1,17 @@
 // Scores labeled posts with the extension's own pipeline and reports errors per filter.
-// Usage: OPENROUTER_API_KEY=... node eval/run.js   (or TYPESAFE_API_KEY=...)
+// Usage: OPENROUTER_API_KEY=... node eval/run.js   (or TYPESAFE_API_KEY=...). Calls Jev directly (not the
+// extension's server) so the model version can be pinned.
 // Env: EVAL_BASE_URL overrides the endpoint; EVAL_MODEL overrides the pinned model version.
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { createHash } from 'node:crypto'
-import { DEFAULTS, PROVIDERS, STRICTNESS, askJev, classify, fingerprint, questionsFor, score, topicId } from '../lib.js'
+import { DEFAULTS, STRICTNESS, askJev, classify, fingerprint, questionsFor, score, topicId } from '../lib.js'
 import { TOPICS } from './config.js'
 
 const file = name => new URL(name, import.meta.url)
 const provider = process.env.OPENROUTER_API_KEY ? 'openrouter' : 'typesafe'
 // Pinned, not jev-latest: an alias can move under you and make runs incomparable.
 const model = process.env.EVAL_MODEL ?? (provider === 'openrouter' ? 'jev-1.13' : 'jev-1.13.0')
-const creds = { apiKey: process.env.OPENROUTER_API_KEY ?? process.env.TYPESAFE_API_KEY, baseUrl: process.env.EVAL_BASE_URL ?? PROVIDERS[provider].baseUrl, model }
+const creds = { apiKey: process.env.OPENROUTER_API_KEY ?? process.env.TYPESAFE_API_KEY, baseUrl: process.env.EVAL_BASE_URL ?? (provider === 'openrouter' ? 'https://openrouter.ai/api' : 'https://api.typesafe.ai'), model }
 if (!creds.apiKey) throw new Error('Set OPENROUTER_API_KEY or TYPESAFE_API_KEY')
 
 // label key in posts.json -> filter

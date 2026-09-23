@@ -1,9 +1,8 @@
-import { PROVIDERS, labelOf, topicId } from './lib.js'
+import { labelOf, topicId } from './lib.js'
 import { loadSettings } from './settings.js'
 
 const $ = s => document.querySelector(s)
 const s = await loadSettings()
-let { keys } = s
 const { lastError } = await chrome.storage.session.get('lastError')
 
 const save = patch => { Object.assign(s, patch); chrome.storage.sync.set(patch); render() }
@@ -48,22 +47,11 @@ function render() {
     : 'Matched posts collapse behind a label; click Show to see them. Posts Feed Control is unsure about are left alone.'
 }
 
+// Only real problems show here (e.g. budget used up); there's nothing to set up.
 function showStatus(error) {
-  const missing = !PROVIDERS[s.provider].shared && !keys[s.provider]
-  const msg = missing ? `Add ${a(PROVIDERS[s.provider].label)} API key to start →` : error
-  $('#warn').textContent = msg ?? ''
-  $('#warn').hidden = !msg
-  $('#warn').classList.toggle('action', missing)
-  $('#warn').tabIndex = missing ? 0 : -1
+  $('#warn').textContent = error ?? ''
+  $('#warn').hidden = !error
 }
-
-// The "add a key" banner jumps straight to the key field.
-$('#warn').onclick = () => {
-  if (!$('#warn').classList.contains('action')) return
-  $('#api').open = true
-  form.key.focus()
-}
-$('#warn').onkeydown = e => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), $('#warn').click())
 
 $('#add').onsubmit = e => {
   e.preventDefault()
@@ -76,45 +64,5 @@ $('#add').onsubmit = e => {
 $('#strictness').onchange = e => save({ strictness: e.target.value })
 $('#matched').onchange = e => save({ matched: e.target.value })
 
-const a = w => (/^[aeiou]/i.test(w) ? 'an ' : 'a ') + w
-
-// Explicit Save: popups close without firing `change`, and permissions.request needs a click.
-// Picking a provider only updates the form; Save commits it.
-const form = $('#apiForm')
-function showProvider(p) {
-  const { label, keyUrl, shared } = PROVIDERS[p]
-  form.provider.value = p
-  $('#freeNote').hidden = !shared
-  $('#keyRow').hidden = shared
-  form.key.disabled = shared
-  form.key.value = keys[p] ?? ''
-  $('#keyLabel').textContent = p === 'custom' ? 'API key' : `${label} API key`
-  $('#keyLink').hidden = !keyUrl
-  if (keyUrl) $('#keyLink').href = keyUrl
-  $('#baseRow').hidden = p !== 'custom'
-  form.base.disabled = p !== 'custom' // disabled fields skip validation
-}
-form.onchange = e => e.target.name === 'provider' && showProvider(e.target.value)
-form.base.value = s.baseUrl
-form.onsubmit = async e => {
-  e.preventDefault()
-  const provider = form.provider.value
-  const baseUrl = provider === 'custom' ? form.base.value.trim().replace(/\/+$/, '') : s.baseUrl
-  if (provider === 'custom' && !await chrome.permissions.request({ origins: [new URL(baseUrl).origin + '/*'] })) {
-    return void ($('#saved').textContent = 'Permission denied')
-  }
-  if (!PROVIDERS[provider].shared) keys = { ...keys, [provider]: form.key.value.trim() }
-  await chrome.storage.session.set({ lastError: '' })
-  await chrome.storage.local.set({ keys })
-  save({ provider, baseUrl })
-  $('#current').textContent = PROVIDERS[provider].label
-  showStatus()
-  $('#saved').textContent = 'Saved'
-  setTimeout(() => $('#saved').textContent = '', 1500)
-}
-
-showProvider(s.provider)
-$('#current').textContent = PROVIDERS[s.provider].label
-$('#api').open = !PROVIDERS[s.provider].shared && !keys[s.provider]
 showStatus(lastError)
 render()

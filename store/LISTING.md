@@ -25,7 +25,7 @@ Upload: `npm run zip` → `feed-control.zip`. Images: `store/screenshot-*.png` (
 >
 > HOW IT WORKS
 >
-> Posts are classified by Jev, TypeSafe's fast decision model. It works out of the box: no account, no API key. Power users can plug in their own OpenRouter or TypeSafe key. Promoted posts and LinkedIn modules are detected from the page itself, with no API call.
+> Posts are classified by Jev, TypeSafe's fast decision model. It works out of the box: no account, no API key, nothing to set up. Promoted posts and LinkedIn modules are detected from the page itself.
 >
 > PRIVATE BY DESIGN
 > No account, no tracking. Post text is only used to classify it and is never stored. Open source: https://github.com/rahulr8/feed-control
@@ -39,11 +39,10 @@ Upload: `npm run zip` → `feed-control.zip`. Images: `store/screenshot-*.png` (
 > Hide unwanted posts (AI-generated filler, advertising, and user-chosen topics) from Reddit, X and LinkedIn feeds.
 
 **Permission justifications:**
-- **storage:** Saves the user's filter settings, topics and API key, and caches classification results for the session.
+- **storage:** Saves the user's filter settings and topics, and caches classification results for the session.
 - **scripting:** After the extension is installed or updated, re-attaches its content script to Reddit/X/LinkedIn tabs that were already open, so filtering works without reloading them.
 - **Host permission: reddit.com, x.com, twitter.com, linkedin.com:** Reads post text in the feed and hides matching posts. These are the only sites the extension runs on.
-- **Host permission: feed-control-api.vercel.app, openrouter.ai, api.typesafe.ai:** Sends post text to the classification service: the extension's own free proxy by default, or the user's own OpenRouter/TypeSafe account.
-- **Optional host permission (https://\*/\*):** Only requested, with a browser prompt, if the user enters a custom API endpoint (e.g. their company's proxy); limited to that one origin.
+- **Host permission: feed-control-api.vercel.app:** The extension's own server, which classifies post text.
 
 **Remote code:** No, I am not using remote code.
 
