@@ -1,0 +1,7 @@
+{
+  "name": "feed-control-api",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "24.x" },
+  "scripts": { "test": "node invalid.test.js" }
+}

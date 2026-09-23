@@ -2,6 +2,8 @@
 
 // Both serve TypeSafe's System One API (POST {baseUrl}/v1/systemone); custom is e.g. a company proxy.
 export const PROVIDERS = {
+  // Default: Feed Control's own proxy (server/), which holds a shared, spend-capped key. No setup for users.
+  free: { label: 'Free', baseUrl: 'https://feed-control-api.vercel.app/api', shared: true },
   openrouter: { label: 'OpenRouter', baseUrl: 'https://openrouter.ai/api', keyUrl: 'https://openrouter.ai/settings/keys' },
   typesafe: { label: 'TypeSafe', baseUrl: 'https://api.typesafe.ai', keyUrl: 'https://console.typesafe.ai/keys' },
   custom: { label: 'Custom' },
@@ -10,7 +12,7 @@ export const PROVIDERS = {
 export const baseUrlOf = s => PROVIDERS[s.provider]?.baseUrl ?? s.baseUrl
 
 export const DEFAULTS = {
-  provider: 'openrouter',
+  provider: 'free',
   baseUrl: '',
   strictness: 'balanced',
   matched: 'blur', // confident matches: 'blur' (collapsed, one click to show) or 'remove' (gone)
@@ -164,15 +166,17 @@ export async function classify({ site, facts = [], post }, { filters, strictness
 }
 
 const ERRORS = { 401: 'Invalid API key', 402: 'Out of credits', 403: 'API key not allowed', 429: 'Rate limited, slow down' }
+// The shared free tier explains itself: its limits aren't the user's doing.
+const SHARED_ERRORS = { 402: 'The free tier is used up for this month. Add your own key under API to keep filtering.', 429: 'The free tier is busy. Filtering resumes in a minute.' }
 const RETRY = [429, 500, 502, 503, 524, 529]
 
 // One request per post, every question fanned out in it (docs.typesafe.ai/patterns/fan-out).
-export async function askJev({ apiKey, baseUrl, model = 'jev-latest' }, post, questions) {
+export async function askJev({ apiKey, baseUrl, model = 'jev-latest', shared }, post, questions) {
   const ids = Object.keys(questions) // sent as q0, q1…: plain keys every API accepts
   for (let attempt = 0; ; attempt++) {
     const res = await fetch(`${baseUrl}/v1/systemone`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...(apiKey && { Authorization: `Bearer ${apiKey}` }) },
       body: JSON.stringify({ model, state: { post }, questions: Object.fromEntries(ids.map((q, i) => [`q${i}`, questions[q]])) }),
       signal: AbortSignal.timeout(10_000),
     })
@@ -182,7 +186,7 @@ export async function askJev({ apiKey, baseUrl, model = 'jev-latest' }, post, qu
         .map((q, i) => [q, answers[`q${i}`]?.noul])
         .filter(([, a]) => typeof a === 'number'))
     }
-    if (attempt === 2 || !RETRY.includes(res.status)) throw new Error(ERRORS[res.status] ?? `API error ${res.status}`)
+    if (attempt === 2 || !RETRY.includes(res.status)) throw new Error((shared && SHARED_ERRORS[res.status]) || ERRORS[res.status] || `API error ${res.status}`)
     const wait = Number(res.headers.get('retry-after')) || 2 ** attempt
     await new Promise(r => setTimeout(r, Math.min(wait, 10) * 1000))
   }

@@ -38,7 +38,7 @@ async function handle(msg) {
   const s = await loadSettings()
   const key = `a:${msg.site}:${msg.id}:${fingerprint(msg.post)}`
   const cached = (await chrome.storage.session.get(key))[key]
-  const ask = s.apiKey && ((post, qs) => askJev({ apiKey: s.apiKey, baseUrl: s.endpoint }, post, qs))
+  const ask = s.ready && ((post, qs) => askJev({ apiKey: s.apiKey, baseUrl: s.endpoint, shared: s.shared }, post, qs))
   const { verdict, answers, asked } = await classify(msg, s, { answers: cached, ask })
   if (asked) await chrome.storage.session.set({ [key]: answers, lastError: '' }).catch(() => chrome.storage.session.clear())
   console.log('[feed-control]', msg.site, msg.post.title || msg.post.body.slice(0, 80), answers, verdict)

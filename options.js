@@ -49,7 +49,7 @@ function render() {
 }
 
 function showStatus(error) {
-  const missing = !keys[s.provider]
+  const missing = !PROVIDERS[s.provider].shared && !keys[s.provider]
   const msg = missing ? `Add ${a(PROVIDERS[s.provider].label)} API key to start →` : error
   $('#warn').textContent = msg ?? ''
   $('#warn').hidden = !msg
@@ -82,8 +82,11 @@ const a = w => (/^[aeiou]/i.test(w) ? 'an ' : 'a ') + w
 // Picking a provider only updates the form; Save commits it.
 const form = $('#apiForm')
 function showProvider(p) {
-  const { label, keyUrl } = PROVIDERS[p]
+  const { label, keyUrl, shared } = PROVIDERS[p]
   form.provider.value = p
+  $('#freeNote').hidden = !shared
+  $('#keyRow').hidden = shared
+  form.key.disabled = shared
   form.key.value = keys[p] ?? ''
   $('#keyLabel').textContent = p === 'custom' ? 'API key' : `${label} API key`
   $('#keyLink').hidden = !keyUrl
@@ -100,7 +103,7 @@ form.onsubmit = async e => {
   if (provider === 'custom' && !await chrome.permissions.request({ origins: [new URL(baseUrl).origin + '/*'] })) {
     return void ($('#saved').textContent = 'Permission denied')
   }
-  keys = { ...keys, [provider]: form.key.value.trim() }
+  if (!PROVIDERS[provider].shared) keys = { ...keys, [provider]: form.key.value.trim() }
   await chrome.storage.session.set({ lastError: '' })
   await chrome.storage.local.set({ keys })
   save({ provider, baseUrl })
@@ -112,6 +115,6 @@ form.onsubmit = async e => {
 
 showProvider(s.provider)
 $('#current').textContent = PROVIDERS[s.provider].label
-$('#api').open = !keys[s.provider]
+$('#api').open = !PROVIDERS[s.provider].shared && !keys[s.provider]
 showStatus(lastError)
 render()

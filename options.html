@@ -65,19 +65,21 @@
       <summary><span>API</span><span id="current"></span></summary>
       <form id="apiForm" class="pad stack">
         <div class="seg" role="radiogroup" aria-label="Provider">
+          <label><input type="radio" name="provider" value="free">Free</label>
           <label><input type="radio" name="provider" value="openrouter">OpenRouter</label>
           <label><input type="radio" name="provider" value="typesafe">TypeSafe</label>
           <label><input type="radio" name="provider" value="custom">Custom</label>
         </div>
         <label class="field" id="baseRow"><span class="label">Base URL</span>
           <input name="base" type="url" pattern="https://.*" title="Must start with https://" placeholder="https://proxy.example.com" spellcheck="false" required></label>
-        <label class="field"><span class="label split"><span id="keyLabel">API key</span><a id="keyLink" target="_blank" rel="noopener">Get a key ↗</a></span>
+        <p class="hint" id="freeNote">Works out of the box on Feed Control's shared key. Heavy use? Add your own OpenRouter or TypeSafe key for no limits.</p>
+        <label class="field" id="keyRow"><span class="label split"><span id="keyLabel">API key</span><a id="keyLink" target="_blank" rel="noopener">Get a key ↗</a></span>
           <input name="key" type="password" autocomplete="off" spellcheck="false"></label>
         <div class="actions"><button class="primary">Save</button><output id="saved" aria-live="polite"></output></div>
       </form>
     </details>
 
-    <p class="hint footer">To classify posts, Feed Control sends the text of posts you scroll past (title, body, author, quoted text, link previews) to your chosen provider. Your API key stays on this device.</p>
+    <p class="hint footer">To classify posts, Feed Control sends the text of posts you scroll past (title, body, author, quoted text, link previews) to your chosen provider. On Free, that's Feed Control's proxy, which forwards to OpenRouter and stores nothing. Keys you add stay on this device.</p>
   </main>
 
   <template id="row">

@@ -9,5 +9,7 @@ export async function loadSettings() {
   if (!['blur', 'remove'].includes(s.matched)) s.matched = DEFAULTS.matched
   if (!(s.provider in PROVIDERS)) s.provider = DEFAULTS.provider
   const { keys = {} } = await chrome.storage.local.get('keys')
-  return { ...s, keys, apiKey: keys[s.provider], endpoint: baseUrlOf(s) }
+  const shared = !!PROVIDERS[s.provider].shared
+  // `ready`: can classify now (shared provider needs no key).
+  return { ...s, keys, apiKey: shared ? undefined : keys[s.provider], shared, ready: shared || !!keys[s.provider], endpoint: baseUrlOf(s) }
 }

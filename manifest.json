@@ -2,12 +2,13 @@
   "manifest_version": 3,
   "name": "Feed Control",
   "version": "0.1.0",
-  "description": "Hide AI slop, ads & any topic on Reddit, X and LinkedIn. Powered by Jev (via OpenRouter or TypeSafe).",
+  "description": "Hide AI slop, ads & any topic on Reddit, X and LinkedIn. Works out of the box, no account or API key needed.",
   "permissions": [
     "storage",
     "scripting"
   ],
   "host_permissions": [
+    "https://feed-control-api.vercel.app/*",
     "https://openrouter.ai/*",
     "https://api.typesafe.ai/*",
     "https://www.reddit.com/*",
