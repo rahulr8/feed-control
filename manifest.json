@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Feed Control",
   "version": "0.1.0",
-  "description": "Hide AI slop, ads & any topic on Reddit and X. Powered by Jev (via OpenRouter or TypeSafe).",
+  "description": "Hide AI slop, ads & any topic on Reddit, X and LinkedIn. Powered by Jev (via OpenRouter or TypeSafe).",
   "permissions": [
     "storage",
     "scripting"
@@ -14,7 +14,8 @@
     "https://sh.reddit.com/*",
     "https://x.com/*",
     "https://twitter.com/*",
-    "https://mobile.x.com/*"
+    "https://mobile.x.com/*",
+    "https://www.linkedin.com/*"
   ],
   "optional_host_permissions": [
     "https://*/*"
@@ -30,7 +31,8 @@
         "https://sh.reddit.com/*",
         "https://x.com/*",
         "https://twitter.com/*",
-        "https://mobile.x.com/*"
+        "https://mobile.x.com/*",
+        "https://www.linkedin.com/*"
       ],
       "js": [
         "content.js"

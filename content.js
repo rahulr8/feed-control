@@ -16,6 +16,16 @@
     return tidy(out.join(''))
   }
 
+  const LI_ITEM = '[componentkey="container-update-list_mainFeed-lazy-container"] > div[data-lazy-mount-id] > div[data-display-contents="true"] > div'
+  const LI_BODY = '[data-testid="expandable-text-box"], [data-view-name="feed-commentary"], .update-components-text'
+  // Why LinkedIn shows a post ("Suggested", "Jane likes this"): the header, or failing that the text above the body.
+  const liHeader = el => {
+    const h = text(el.querySelector('[data-view-name="feed-header-text"]'))
+    if (h) return h
+    const all = text(el), body = text(el.querySelector(LI_BODY))
+    return (body ? all.slice(0, Math.max(0, all.indexOf(body.slice(0, 40)))) : all).slice(0, 200)
+  }
+
   // Per-site DOM knowledge. Everything else (classification, UI) is shared.
   const SITES = {
     reddit: {
@@ -24,7 +34,7 @@
       host: el => el.closest('article') ?? el.parentElement,
       // Never hide the post the user deliberately opened.
       eligible: el => el.getAttribute('view-context') !== 'CommentsPage',
-      promoted: el => el.localName === 'shreddit-ad-post',
+      facts: el => el.localName === 'shreddit-ad-post' ? ['promoted'] : [],
       read: el => ({
         title: el.getAttribute('post-title') ?? '',
         body: lines(el.querySelector('[slot="text-body"]')).slice(0, 1500),
@@ -40,7 +50,7 @@
       host: el => el.closest('[data-testid="cellInnerDiv"]') ?? el.parentElement,
       // The tweet opened on its own page has tabIndex -1; replies below it are fair game.
       eligible: el => el.tabIndex !== -1,
-      promoted: el => !!el.closest('[data-testid="placementTracking"]'),
+      facts: el => el.closest('[data-testid="placementTracking"]') ? ['promoted'] : [],
       read: el => {
         // ponytail: quoted tweet = tweetText inside a nested role=link card; revisit if X changes quote markup.
         const texts = [...el.querySelectorAll('[data-testid="tweetText"]')]
@@ -54,9 +64,44 @@
         }
       },
     },
+    // LinkedIn: hashed classes, no data-urn; only componentkey / data-view-name / data-testid are stable.
+    // Selectors as verified live by LinkOff (2026-09-18) and Slop Mop (2026-09-18); legacy ones kept as fallbacks.
+    // ponytail: module/header detection matches English copy only.
+    linkedin: {
+      // Every feed item, including non-post modules like "Jobs recommended for you".
+      sel: `${LI_ITEM}, [role="listitem"][componentkey^="update-card"], div[data-urn^="urn:li:activity:"]`,
+      id: el => {
+        const key = (el.matches('[componentkey^="update-card"]') ? el : el.querySelector('[componentkey^="update-card"]'))?.getAttribute('componentkey')
+        // Posts render up to 3x (base + "expanded…FeedType_…" variants): normalise to the base id.
+        return key?.replace(/^update-card(-focus)?/, '').replace(/^expanded/, '').replace(/FeedType_.*$/, '')
+          ?? el.getAttribute('data-urn') ?? el.parentElement?.parentElement?.getAttribute('data-lazy-mount-id')
+      },
+      host: el => el,
+      // Skip a permalink page (you opened that post) and post roots nested in a feed item we already handle.
+      eligible: el => !location.pathname.startsWith('/feed/update/') && !el.parentElement?.closest(LI_ITEM),
+      facts: el => {
+        const header = liHeader(el), isPost = !!el.querySelector(LI_BODY)
+        const out = []
+        const ad = [...el.querySelectorAll('[aria-label]')].some(n => /\b(sponsored|promoted)\b/i.test(n.getAttribute('aria-label')))
+          || [...el.querySelectorAll('span, p, a')].some(n => /^\s*(promoted|sponsored)\s*$/i.test(n.childElementCount ? '' : n.textContent))
+        if (ad) out.push('promoted')
+        if (/^\s*suggested\b/i.test(header) || el.querySelector('[data-view-name*="suggest"]')) out.push('suggested')
+        if (/\b(likes?|loves|celebrates|supports|finds this (insightful|funny)|is curious about|commented on|reposted) this\b/i.test(header)) out.push('activity')
+        // Modules (no post text) only, so a post that says "…recommended for you" isn't caught.
+        if (!isPost && /jobs recommended for you|recommended for you|people you may know|add to your feed/i.test(text(el).slice(0, 300))) out.push('recommendations')
+        return out
+      },
+      read: el => {
+        const author = text(el.querySelector('[data-view-name="feed-author-name"]'))
+          || el.querySelector('[aria-label^="Open control menu for post by "]')?.getAttribute('aria-label').slice(30) || ''
+        const box = el.querySelector(LI_BODY)
+        return { author, body: box ? tidy(box.innerText.replace(/[\s…]*\bmore\s*$/i, '')).slice(0, 1500) : '' }
+      },
+    },
   }
   // FEED_CONTROL_SITE: dev fixtures only; real pages can't set it (content scripts run in an isolated world).
-  const siteKey = globalThis.FEED_CONTROL_SITE ?? (/(^|\.)(x|twitter)\.com$/.test(location.hostname) ? 'x' : 'reddit')
+  const siteKey = globalThis.FEED_CONTROL_SITE
+    ?? (/(^|\.)(x|twitter)\.com$/.test(location.hostname) ? 'x' : /(^|\.)linkedin\.com$/.test(location.hostname) ? 'linkedin' : 'reddit')
   const site = SITES[siteKey]
 
   const revealed = new Set()
@@ -67,7 +112,7 @@
   async function classify(el) {
     const id = site.id(el), gen = generation
     try {
-      const v = await chrome.runtime.sendMessage({ site: siteKey, id, promoted: site.promoted(el), post: site.read(el) })
+      const v = await chrome.runtime.sendMessage({ site: siteKey, id, facts: site.facts(el), post: site.read(el) })
       if (v?.error || gen !== generation || !el.isConnected || site.id(el) !== id || revealed.has(id)) return
       verdicts.set(id, v)
       apply(el, v)
@@ -131,6 +176,11 @@
     else io.observe(el)
   })
 
+  // Page-level filters (e.g. LinkedIn sidebar clutter) are pure CSS keyed off an <html> attribute.
+  const applyPage = () => chrome.runtime.sendMessage({ site: siteKey, page: true })
+    .then(ids => { document.documentElement.dataset.feedControlPage = ids.join(' ') }).catch(() => {})
+  applyPage()
+
   let queued = 0
   new MutationObserver(() => queued ||= requestAnimationFrame(() => { queued = 0; scan() }))
     .observe(document.body, { childList: true, subtree: true })
@@ -140,6 +190,7 @@
   // unless a new filter was added). Off-screen posts get re-checked when scrolled to.
   chrome.storage.onChanged.addListener((_, area) => {
     if (area === 'session') return
+    applyPage()
     generation++
     verdicts.clear()
     document.querySelectorAll(site.sel).forEach(el => {

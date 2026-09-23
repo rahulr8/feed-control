@@ -55,3 +55,12 @@ article[data-feed-control="remove"] + hr { display: none; } /* Reddit's divider 
 @media (prefers-reduced-motion: reduce) {
   [data-feed-control] > *, .feed-control-pill > span { transition: none !important; }
 }
+
+/* LinkedIn sidebar clutter (page-level filter "sidebar"); data-view-names as verified by LinkOff 2026-09-18. */
+html[data-feed-control-page~="sidebar"] :is(
+  [data-view-name="news-module"],
+  [data-view-name="premium-upsell-card"],
+  [data-view-name="identity-module-upsell"],
+  [data-view-name="premium-nav-upsell-text"],
+  :has(> iframe[componentkey="MainFeedDesktopNav_feed_ad"])
+) { display: none !important; }

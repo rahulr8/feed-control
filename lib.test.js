@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { DEFAULTS, applies, classify, fingerprint, labelOf, questionsFor, score, verdict, topicId } from './lib.js'
+import { DEFAULTS, FACTS, applies, classify, fingerprint, labelOf, pageFilters, questionsFor, score, verdict, topicId, withBuiltins } from './lib.js'
 
 const sports = { id: topicId('Sports'), label: 'Sports', on: true }
 const filters = [...DEFAULTS.filters, sports]
@@ -48,7 +48,7 @@ const post = { title: 'Lakers win', body: '' }
 let calls = []
 const ask = async (_, q) => { calls.push(Object.keys(q)); return Object.fromEntries(Object.keys(q).map(k => [k, k === 'topic-sports.match' ? 0.9 : 0.1])) }
 
-let r = await classify({ site: 'reddit', promoted: true, post }, settings, { ask })
+let r = await classify({ site: 'reddit', facts: ['promoted'], post }, settings, { ask })
 assert.equal(r.verdict.label, 'Promoted post'); assert.equal(calls.length, 0, 'ads never hit the API')
 
 r = await classify({ site: 'reddit', post }, settings, { ask })
@@ -71,7 +71,25 @@ const sportsAsk = v => async (_, q) => Object.fromEntries(Object.keys(q).map(k =
 const removeMode = { filters, strictness: 'balanced', matched: 'remove' }
 assert.equal((await classify({ site: 'reddit', post }, removeMode, { ask: sportsAsk(0.9) })).verdict.tier, 'remove')
 assert.equal((await classify({ site: 'reddit', post }, removeMode, { ask: sportsAsk(0.6) })).verdict.tier, 'dim', 'borderline never removed')
-assert.equal((await classify({ site: 'reddit', promoted: true, post }, removeMode)).verdict.tier, 'remove')
+assert.equal((await classify({ site: 'reddit', facts: ['promoted'], post }, removeMode)).verdict.tier, 'remove')
 assert.equal((await classify({ site: 'reddit', post }, settings, { ask: sportsAsk(0.9) })).verdict.tier, 'hide', 'blur is the default')
+
+// Fact filters (LinkedIn): decided by markup, never by Jev, and only on their own site.
+calls = []
+const li = (facts, p = post) => classify({ site: 'linkedin', facts, post: p }, settings, { ask })
+assert.equal((await li(['suggested'])).verdict.label, 'Suggested post'); assert.equal(calls.length, 0)
+assert.equal((await li(['activity'])).verdict.label, 'About Sports', 'activity filter is off by default, so the post goes to Jev as usual')
+assert.equal((await li(['recommendations'], { body: '' })).verdict.label, 'LinkedIn recommendation', 'modules with no text still hide')
+assert.equal((await classify({ site: 'reddit', facts: ['suggested'], post }, settings, { ask })).verdict.label, 'About Sports', 'LinkedIn-only filter ignored on Reddit')
+calls = []
+assert.equal((await li([], { body: '' })).verdict, null); assert.equal(calls.length, 0, 'nothing to judge: no API call')
+assert.ok(FACTS.includes('promoted'))
+
+// Page-level filters and built-in migration.
+assert.deepEqual(pageFilters(settings, 'linkedin'), ['sidebar'])
+assert.deepEqual(pageFilters(settings, 'reddit'), [])
+const old = [{ id: 'promoted', label: 'Promoted', on: false }, { id: 'topic-x', label: 'x', on: true }]
+const merged = withBuiltins(old)
+assert.equal(merged[0].on, false, 'user choice kept'); assert.ok(merged.some(f => f.id === 'recommendations'), 'new built-in added')
 
 console.log('ok')

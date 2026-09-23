@@ -1,6 +1,6 @@
 # Feed Control
 
-Hide AI slop, ads & any topic on Reddit and X. A Chrome extension that blurs promoted posts, AI slop, stealth ads, and any topics you choose from your Reddit and X (Twitter) feeds. Classification uses [TypeSafe's Jev](https://docs.typesafe.ai) model.
+Hide AI slop, ads & any topic on Reddit, X and LinkedIn. A Chrome extension that blurs promoted posts, AI slop, stealth ads, and any topics you choose from your Reddit and X (Twitter) feeds. Classification uses [TypeSafe's Jev](https://docs.typesafe.ai) model.
 
 ## Install
 1. `chrome://extensions` → enable Developer mode → **Load unpacked** → this folder.
@@ -16,7 +16,8 @@ Hide AI slop, ads & any topic on Reddit and X. A Chrome extension that blurs pro
 | `options.*` | Popup / settings page. |
 
 ## How it works
-- Promoted posts / ads are detected from the site's markup (`shreddit-ad-post` on Reddit, `placementTracking` on X); no API call.
+- **Facts** are things the page's own markup proves, decided in code with no API call: ads (`shreddit-ad-post` on Reddit, `placementTracking` on X, "Sponsored" labels on LinkedIn) and, on LinkedIn, *Suggested* posts, posts surfaced because your network liked/commented, and *Jobs recommended for you* / *People you may know* modules. Each is a toggle in the popup.
+- **Page-level** filters are pure CSS: LinkedIn's sidebar news, Premium upsells and sidebar ad.
 - Site-specific DOM reading lives in `SITES` in `content.js`; everything else is shared. X is a virtualized React list, so verdicts are remembered per tweet id and re-applied instantly when a tweet re-mounts.
 - Every other post gets one Jev request, with all questions fanned out in it. Each filter is a set of yes/no questions whose answers are combined with weights in code (`lib.js`).
 - Custom topics each add one question. Answers are cached per post for the browser session.
@@ -26,7 +27,10 @@ Hide AI slop, ads & any topic on Reddit and X. A Chrome extension that blurs pro
 
 ## Dev
 - `npm test`: scoring self-check.
-- `python3 -m http.server`, then open `/dev/feed.html` (Reddit), `/dev/x.html` (X) or `/dev/popup.html` to preview with a fake `chrome` API.
+- `python3 -m http.server`, then open `/dev/feed.html` (Reddit), `/dev/x.html` (X), `/dev/linkedin.html` (LinkedIn) or `/dev/popup.html` to preview with a fake `chrome` API.
+
+## Site notes
+- **LinkedIn** ships hashed class names and no `data-urn`; only `componentkey`, `data-view-name` and `data-testid` are stable. Selectors follow what LinkOff and Slop Mop verified live (Sept 2026). Module/header detection ("Suggested", "likes this", "Jobs recommended for you") matches English copy only.
 - `npm run zip`: store-ready package.
 
 ## Eval (measure accuracy on real posts)

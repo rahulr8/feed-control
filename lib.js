@@ -14,15 +14,31 @@ export const DEFAULTS = {
   baseUrl: '',
   strictness: 'balanced',
   matched: 'blur', // confident matches: 'blur' (collapsed, one click to show) or 'remove' (gone)
+  // `site`: only shown and applied on that site. Fact filters (FACTS) are detected by code, never by Jev.
   filters: [
     { id: 'promoted', label: 'Promoted', on: true },
     { id: 'slop', label: 'AI slop', on: true },
     { id: 'stealth', label: 'Ads & self-promo', on: true },
+    { id: 'suggested', label: 'Suggested posts', on: true, site: 'linkedin' },
+    { id: 'activity', label: 'Posts your network liked or commented on', on: false, site: 'linkedin' },
+    { id: 'recommendations', label: 'Jobs & people recommendations', on: true, site: 'linkedin' },
+    { id: 'sidebar', label: 'Sidebar news & Premium upsells', on: true, site: 'linkedin', page: true },
   ],
 }
 
+// Filters decided by the page's own markup (content.js reports them per post). A match skips Jev entirely.
+export const FACTS = ['promoted', 'suggested', 'activity', 'recommendations']
+
 // Built-in labels come from code so renames reach users whose filters are already saved.
 export const labelOf = f => DEFAULTS.filters.find(d => d.id === f.id)?.label ?? f.label
+
+// Saved filter lists predate newer built-ins: append any missing ones, keep the user's order and choices.
+export const withBuiltins = saved => [...saved, ...DEFAULTS.filters.filter(d => !saved.some(f => f.id === d.id))]
+
+const forSite = (f, site) => !f.site || f.site === site
+
+// Page-level filters (not tied to a post) that are on for this site, e.g. LinkedIn's sidebar clutter.
+export const pageFilters = ({ filters }, site) => filters.filter(f => f.on && f.page && forSite(f, site)).map(f => f.id)
 
 // [hide, dim] thresholds on a filter's 0–1 score
 export const STRICTNESS = { relaxed: [0.85, 0.7], balanced: [0.75, 0.55], strict: [0.6, 0.45] }
@@ -64,7 +80,7 @@ const COMBINE = {
 
 // Slop is judged on writing; title-only posts (images, links, video) give it nothing to judge.
 // Tweets are short by design and have no title, so the bar is lower there.
-export const MIN_SLOP_BODY = { reddit: 120, x: 60 }
+export const MIN_SLOP_BODY = { reddit: 120, x: 60, linkedin: 120 }
 export const applies = (f, post, site = 'reddit') => f.id !== 'slop' || post.body.length >= MIN_SLOP_BODY[site]
 
 // Topic passed as data, not spliced into a sentence, so any phrasing works ("Trump", "AI-related", "sports").
@@ -101,6 +117,9 @@ export function score(f, answers) {
 // What the user sees on a hidden post: [confident, borderline].
 const PHRASES = {
   promoted: ['Promoted post'],
+  suggested: ['Suggested post'],
+  activity: ['Shown via network activity'],
+  recommendations: ['LinkedIn recommendation'],
   slop: ['Likely AI slop', 'Possibly AI slop'],
   stealth: ['Likely promotional', 'Possibly promotional'],
 }
@@ -130,14 +149,15 @@ export const fingerprint = obj => {
 // The whole decision for one post, shared by the extension, eval/run.js and the dev stub.
 // Callers own caching and transport: pass cached `answers` and an `ask(post, questions)` (omit to never ask).
 // Returns the verdict plus the merged answers; `asked` says whether new answers need caching.
-export async function classify({ site, promoted, post }, { filters, strictness, matched }, { answers = {}, ask } = {}) {
+// `facts`: FACTS ids the page's markup proved for this post (e.g. ['promoted'], ['suggested']).
+export async function classify({ site, facts = [], post }, { filters, strictness, matched }, { answers = {}, ask } = {}) {
   // 'remove' only upgrades confident hides; borderline (dim) posts are never silently erased.
   const style = v => v?.tier === 'hide' && matched === 'remove' ? { ...v, tier: 'remove' } : v
-  const active = filters.filter(f => f.on && applies(f, post, site))
-  if (promoted) {
-    const f = active.find(f => f.id === 'promoted')
-    return { verdict: style(f ? { label: describe(f, 'hide'), tier: 'hide' } : null), answers, asked: false }
-  }
+  const active = filters.filter(f => f.on && forSite(f, site) && applies(f, post, site))
+  const fact = active.find(f => facts.includes(f.id))
+  if (fact) return { verdict: style({ label: describe(fact, 'hide'), tier: 'hide' }), answers, asked: false }
+  // Ads are never judged by Jev, even when the Promoted filter is off.
+  if (facts.includes('promoted') || !post.body && !post.title) return { verdict: null, answers, asked: false }
   // Only questions not answered yet, e.g. a newly added topic.
   const missing = Object.entries(questionsFor(active)).filter(([q]) => !(q in answers))
   const asked = missing.length > 0 && !!ask

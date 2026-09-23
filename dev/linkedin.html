@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Feed Control dev LinkedIn</title>
+  <link rel="stylesheet" href="../content.css">
+  <style>
+    body { margin: 0; background: #f4f2ee; color: #191919; font: 14px/1.45 system-ui, sans-serif; }
+    .page { display: grid; grid-template-columns: 560px 300px; gap: 24px; justify-content: center; padding: 24px; }
+    [data-lazy-mount-id] > div > div { background: #fff; border-radius: 8px; box-shadow: 0 0 0 1px #0000001a; padding: 12px 16px; margin-bottom: 8px; }
+    [data-view-name="feed-header-text"] { color: #666; font-size: 12px; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 8px; }
+    [data-view-name="feed-author-name"] { font-weight: 600; }
+    aside > * { background: #fff; border-radius: 8px; padding: 12px; margin-bottom: 8px; box-shadow: 0 0 0 1px #0000001a; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main><div componentkey="container-update-list_mainFeed-lazy-container" id="feed"></div></main>
+    <aside>
+      <div data-view-name="news-module"><b>LinkedIn News</b><br>Top stories · 2h</div>
+      <div data-view-name="premium-upsell-card">Try Premium for $0</div>
+      <div><iframe componentkey="MainFeedDesktopNav_feed_ad" title="ad" style="border:0;height:60px;width:100%;background:#eef"></iframe></div>
+      <div id="keep">About · Accessibility · Help Center</div>
+    </aside>
+  </div>
+  <script type="module">
+    import './stub.js'
+    window.FEED_CONTROL_SITE = 'linkedin'
+    const item = (n, inner) => `<div data-lazy-mount-id="lazy-${n}"><div data-display-contents="true"><div>${inner}</div></div></div>`
+    const post = ({ id, header, author, body, ad }) => `
+      <div role="listitem" componentkey="update-cardurn:li:activity:${id}">
+        ${header ? `<div data-view-name="feed-header-text">${header}</div>` : ''}
+        <div data-view-name="feed-author-name">${author}</div>
+        <button aria-label="Open control menu for post by ${author}">···</button>
+        ${ad ? '<span>Promoted</span> <a aria-label="View Sponsored Content" href="#">↗</a>' : ''}
+        <div data-testid="expandable-text-box">${body}<button data-testid="expandable-text-button">… more</button></div>
+      </div>`
+    feed.innerHTML = [
+      post({ id: 7001, author: 'Priya Shah', body: 'We cut our CI time from 40 to 9 minutes by caching Docker layers in S3. Write-up with numbers in the comments.' }),
+      post({ id: 7002, author: 'Growth Guru', body: 'I got rejected from 47 jobs.\nThen I did this.\nConsistency.\nMindset.\nHere\'s the thing: success is a journey, not a destination. 🚀\nAgree?' }),
+      post({ id: 7003, header: 'Suggested', author: 'Some Influencer', body: 'Five lessons from my morning routine that every leader should know about.' }),
+      post({ id: 7004, header: 'Jane Doe likes this', author: 'Acme Corp', body: 'Acme Corp is hiring engineers in Toronto for our payments platform team.' }),
+      `<section><h2>Jobs recommended for you</h2><div>Senior Engineer · Shopify · Remote</div></section>`,
+      post({ id: 7005, author: 'Acme Cloud', body: 'Ship 10x faster with Acme Cloud. Start your free trial today.', ad: true }),
+      post({ id: 7006, author: 'Lena Park', body: 'Here are 5 books recommended for you if you are getting into distributed systems: DDIA, …' }),
+      post({ id: 7007, author: 'Marco Rossi', body: 'My team likes this approach to on-call: one week, then a full week off to recover.' }),
+    ].map((html, i) => item(i, html)).join('')
+    document.body.append(Object.assign(document.createElement('script'), { src: '../content.js' }))
+  </script>
+</body>
+</html>

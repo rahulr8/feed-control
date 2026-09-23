@@ -9,20 +9,23 @@ const { lastError } = await chrome.storage.session.get('lastError')
 const save = patch => { Object.assign(s, patch); chrome.storage.sync.set(patch); render() }
 const setFilters = fn => save({ filters: fn(s.filters) })
 
+function row(f) {
+  const li = $('#row').content.firstElementChild.cloneNode(true)
+  const box = li.querySelector('input')
+  box.checked = f.on
+  box.onchange = () => setFilters(fs => fs.map(x => x.id === f.id ? { ...x, on: box.checked } : x))
+  li.querySelector('span').textContent = labelOf(f)
+  const rm = li.querySelector('.rm')
+  if (f.id.startsWith('topic-')) {
+    rm.setAttribute('aria-label', `Remove ${f.label}`)
+    rm.onclick = () => setFilters(fs => fs.filter(x => x.id !== f.id))
+  } else rm.remove()
+  return li
+}
+
 function render() {
-  $('#filters').replaceChildren(...s.filters.map(f => {
-    const li = $('#row').content.firstElementChild.cloneNode(true)
-    const box = li.querySelector('input')
-    box.checked = f.on
-    box.onchange = () => setFilters(fs => fs.map(x => x.id === f.id ? { ...x, on: box.checked } : x))
-    li.querySelector('span').textContent = labelOf(f)
-    const rm = li.querySelector('.rm')
-    if (f.id.startsWith('topic-')) {
-      rm.setAttribute('aria-label', `Remove ${f.label}`)
-      rm.onclick = () => setFilters(fs => fs.filter(x => x.id !== f.id))
-    } else rm.remove()
-    return li
-  }))
+  $('#filters').replaceChildren(...s.filters.filter(f => !f.site).map(row))
+  $('#linkedin').replaceChildren(...s.filters.filter(f => f.site === 'linkedin').map(row))
   $(`[name=strictness][value=${s.strictness}]`).checked = true
   $(`[name=matched][value=${s.matched}]`).checked = true
   $('#matchedNote').textContent = s.matched === 'remove'

@@ -1,4 +1,4 @@
-import { askJev, classify, fingerprint } from './lib.js'
+import { askJev, classify, fingerprint, pageFilters } from './lib.js'
 import { loadSettings } from './settings.js'
 
 chrome.runtime.onInstalled.addListener(async ({ reason }) => {
@@ -15,6 +15,7 @@ chrome.runtime.onInstalled.addListener(async ({ reason }) => {
 })
 
 chrome.runtime.onMessage.addListener((msg, _, reply) => {
+  if (msg.page) { loadSettings().then(s => reply(pageFilters(s, msg.site))); return true }
   serial(`${msg.site}:${msg.id}`, () => handle(msg)).then(reply, e => {
     chrome.storage.session.set({ lastError: e.message })
     reply({ error: e.message })
