@@ -1,0 +1,9 @@
+{
+  "name": "feed-control",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node lib.test.js",
+    "zip": "rm -f feed-control.zip && zip -rq feed-control.zip manifest.json background.js content.js content.css lib.js settings.js options.html options.js options.css icons"
+  }
+}

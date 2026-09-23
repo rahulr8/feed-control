@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Feed Control dev popup</title><link rel="stylesheet" href="../options.css"></head>
+<body>
+  <script type="module">
+    import './stub.js'
+    const html = await (await fetch('../options.html')).text()
+    document.body.innerHTML = new DOMParser().parseFromString(html, 'text/html').body.innerHTML
+    await import('../options.js')
+  </script>
+</body>
+</html>

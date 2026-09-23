@@ -1,0 +1,6 @@
+.DS_Store
+*.zip
+# Local tool config
+.claude/
+# Cached Jev answers from eval/run.js (derived; re-run to regenerate)
+eval/answers.json

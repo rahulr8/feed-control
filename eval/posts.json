@@ -1,0 +1,1109 @@
+[
+  {
+    "id": "t3_1wnj5uv",
+    "title": "BREAKING: Eby calls snap election for October 24",
+    "body": "",
+    "subreddit": "r/vancouver",
+    "flair": "",
+    "link_domain": "sitkamedia.ca",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnchjw",
+    "title": "Which YouTuber that you used to watch all the time slowly started becoming unwatchable?",
+    "body": "",
+    "subreddit": "r/AskReddit",
+    "flair": "",
+    "link_domain": "self.AskReddit",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnm8l5",
+    "title": "Trump says U.S. to continue buying Canadian potash but wants cheaper price",
+    "body": "",
+    "subreddit": "r/onguardforthee",
+    "flair": "",
+    "link_domain": "thestar.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn4ajk",
+    "title": "So real",
+    "body": "",
+    "subreddit": "r/SaaS",
+    "flair": "",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn3qqx",
+    "title": "Building is easy, selling is hard",
+    "body": "",
+    "subreddit": "r/SaaS",
+    "flair": "",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wng32i",
+    "title": "just hit 17 subss!!",
+    "body": "",
+    "subreddit": "r/SaaS",
+    "flair": "",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnos1a",
+    "title": "She: Why are you randomly smiling at 3 AM looking at your phone? Me:",
+    "body": "",
+    "subreddit": "r/SaaS",
+    "flair": "",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnm5gy",
+    "title": "It’s finally my time to post the Stripe screenshot!",
+    "body": "",
+    "subreddit": "r/SaaS",
+    "flair": "",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn1080",
+    "title": "111k people watched me make $0.000 😅",
+    "body": "",
+    "subreddit": "r/SaaS",
+    "flair": "",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnbv9k",
+    "title": "hey there i just wanted to thank you all",
+    "body": "and no this is not a promotional post i have always been fanatic of building something and a thing that i can say is mine that passion lead me to build a few small saas projects in the covid era but tbh they were failures and i lost nearly all of my income trying to get more users through ads and all but over a period of god knows what i was able to figure out multiple ways to get lead and enrich them this eventually lead me to building my own plat form for getting high intent leads it helped me to pay my billls through college i had once lost hope if i would get any money from this but watching all you guys posts made my belief firm that this would work",
+    "subreddit": "r/SaaS",
+    "flair": "",
+    "link_domain": "self.SaaS",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnmfa8",
+    "title": "SaaS founders: how do you decide what marketing to work on next?",
+    "body": "I’m building something around marketing and realized I don’t really know how other founders handle this, so I figured I’d just ask here. Like, when you’re trying to grow: how do you decide what channel to try? how do you figure out why growth is slow? do you actually look at competitors, customers, funnel data etc. or mostly just go with your gut? what part of marketing do you hate doing yourself? if you could basically have someone constantly looking at your marketing and telling you what you’re missing, what would you want them to look at? Not trying to sell anything btw, I’m still trying to figure out if the problem I’m thinking about is actually a real problem. Curious how you guys actually do this. Even if the answer is just \"idk, I’m winging it\" lol",
+    "subreddit": "r/SaaS",
+    "flair": "",
+    "link_domain": "self.SaaS",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnof8o",
+    "title": "Stuck navigating between dashboards and platforms for SaaS projects.",
+    "body": "Realised that most of the current systems and services people use for deployment take up too much time, and as much as they give observability into your apps, I’ve managed to find I’m constantly sifting between multiple tabs and windows just to look at what’s what. Currently building a platform that makes that easier, end to end, with everything included, a way to establish more control over systems that should be closely correlated. What’s some of the stories you have from experiences where you’ve constantly had to sift between services on your projects? What deployment scares have you had?",
+    "subreddit": "r/SaaS",
+    "flair": "",
+    "link_domain": "self.SaaS",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnn4gg",
+    "title": "the hardest engineering problem in my AI product turned out to be making the model wrong on purpose",
+    "body": "I have built an AI math tutor that's deliberately incorrect. The character (a robot called Errol) works through a problem, gets it wrong somewhere, and the kid's job is to catch the mistake and explain why it's wrong. Premise being that every other AI tutor is racing to be correct, and what kids are actually going to need is the ability to tell when the machine isn't. I assumed the \"being wrong\" part would be the easy half. It was by far the hardest thing in the build. LLMs are genuinely bad at being wrong on purpose. Ask for a subtly incorrect solution and you get one of two failure modes. Either the error is so obvious a six year old spots it instantly, or the \"wrong\" answer is accidentally correct. That second one will kill the product. Show a kid a correct answer, tell them it's wrong, and you've taught them to distrust their own good reasoning. That is worse than teaching them nothing. So nothing reaches a kid unchecked. Every generated problem gets independently verified as actually wrong before it's allowed anywhere near a user, and if it doesn't hold up it gets thrown away and regenerated. I eat the cost on every discarded one. Non negotiable though, because the failure is silent. Nobody reports the bug where the app told a kid they were wrong when they weren't. They just quietly stop using it. Difficulty calibration is the product, not a feature. Too obvious and they're bored in two minutes. Too subtle and they feel stupid, which is the one thing you cannot do to a 1",
+    "subreddit": "r/SaaS",
+    "flair": "",
+    "link_domain": "self.SaaS",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnej8p",
+    "title": "Why do people sell startups that are already making decent money?",
+    "body": "I keep seeing listings like: - profitable for 2+ years - low expenses - growing revenue - owner only works a few hours a week And then...selling for $60k. My first thought is always: if it's really that good, why sell it? For anyone here who's sold a profitable business, what was the real reason you wanted out?",
+    "subreddit": "r/Entrepreneur",
+    "flair": "Best Practices",
+    "link_domain": "self.Entrepreneur",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnhltb",
+    "title": "Which One Of These Is The Best Business Idea?",
+    "body": "I'm a self employed sole prop. I make around 20k a month for myself. I want to get from just having a good income, to actually building wealth. So this next phase of my life i'm focused on owning assets to build wealth and eventually retire, because right now I have no retirement plan. if I stop working tomorrow i'm broke in a year. Looking for something that cashflows semi-passively, something that I can implement the \"buy, borrow, die\" tax strategy on, and something I can eventually sell to private equity. I basically have 4 ideas, and I want some feedback on which one you think is best. Keeping in mind I don't have that much money. Only about 150k saved unfortunately. I'm 35 years old. Here's the 4 ideas 1- RCFE's (Residential Care Facility For The Elderly). This is where you convert normal houses into senior living facilities. There's a ton of regulation and licensing requirements around it, so start up is hard, but after that you have a cashflowing asset. I actually made a post about this the other day, it's something iv'e already kinda started working on but a lot of people seem to think it's a bad idea. 2- Section 8 Rentals. Pretty self explanatory. 3- Long term stay RV parks. I'm in California. There's a major affordable housing shortage here and would probably be pretty easy to get everything approved by the city. Cool thing about these is people are bringing their own unit so there's no unit maintenance required and tenant laws are less strict, you can boot people r",
+    "subreddit": "r/Entrepreneur",
+    "flair": "Starting a Business",
+    "link_domain": "self.Entrepreneur",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn6z3w",
+    "title": "Please recommend an Alibaba supplier for good quality packaging for clothes",
+    "body": "I've tried ordering plastic poly bags for clothing on Alibaba from two different suppliers, but the feel of the plastic is not exactly what I'm after. I'd like something that feels smooth and a bit thicker but have no idea what I should be looking for and it's honestly hard to judge the feel and quality of the plastic from pics. If you run a clothing brand or buy clothes from some of the more higher end brands you will probably know the feeling of the plastic I'm trying to describe. It just feels really nice to the touch and sturdy. If anyone could help recommend a supplier I'd very much appreciate it. Even if it's not plastic and something more eco-friendly like a cotton drawstring bag, I'd love to try if you're happy to share.",
+    "subreddit": "r/Entrepreneur",
+    "flair": "Recommendations",
+    "link_domain": "self.Entrepreneur",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn38vm",
+    "title": "Talent Tuesday: Services and Collabs | September 22, 2026",
+    "body": "Looking to hire, get hired, or find a collaborator? Post what you're offering or what you need. Keep it brief: who you are, what you do, and how to reach you. No spamming.",
+    "subreddit": "r/Entrepreneur",
+    "flair": "Weekly Discussion",
+    "link_domain": "self.Entrepreneur",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnl3v1",
+    "title": "Rich uncle wants to help me to start a business but i don't know what...",
+    "body": "I have an uncle who has multiple businesses. Hes already a millionaire and i guess hes bored. He wants to support me (i live in another country, hes outside of EU) to start something myself. I guess he wants a percentage of my income later? No idea I recently started a taxi company and I told him that he can buy me 20 taxis. But im not sure if that was the right call? What would you guys recommend me? What could i start to make big money down the road? Im 30 and working in IT with a pretty good salary.",
+    "subreddit": "r/Entrepreneur",
+    "flair": "Starting a Business",
+    "link_domain": "self.Entrepreneur",
+    "labels": null
+  },
+  {
+    "id": "t3_1wmoikd",
+    "title": "Small construction business: $53k cash (mixed with personal), active contracts, two full renovations on houses I own and considering my first hire",
+    "body": "Current situation I used to renovate houses that I bought one after the other. These were mainly rentals and I kept them as rentals (BRRRR method of real estate investing). Currently have $113k in cash, mixed business/personal cash. I live below my means at about 25k/year. Planning to spend $60k on another property (which will be rented out fairly quickly after minor reno), leaving ~ $50k cash leftover I have 2 vacant houses of my own to renovate (bought in cash, very little taxes and no other holding costs). I should reserve about 45k for materials costs. Both are at 0% complete rehab (6+ months each). Coming up For a different house, refinance (out of cash) that I've nearly completed renovations. Should get back at least 100k . That will come in about 3.5 months. Property taxes will be due around then. That's about a 15k bite. For client projects, not my own properties, I'm allowed 50% of the contract price up front. Prefer to actually start work before getting that but I could get that draw whenever: Contract #1: $24k project, contracted but work hasn't started yet. 12k is 50% draw 10k gross profit Contract #2: $48k same deal 24k is 50% draw 15k gross profit Most of this work (roofing/siding) is subcontracted out. I planned on doing 1 bathroom remodel + 1/2 bath remodel + door installs and a few other odds and ends. Hiring situation Considering hiring my first full-time employee \"Residential Maintenance Technician\" Expected wage: $30-35/hr My estimated total employer cost:",
+    "subreddit": "r/Entrepreneur",
+    "flair": "Growth and Expansion",
+    "link_domain": "self.Entrepreneur",
+    "labels": null
+  },
+  {
+    "id": "t3_1wmlu8y",
+    "title": "How much of your marketing comes from what happens after the sale?",
+    "body": "I think most companies leave some of their best marketing buried inside delivery. A customer buys for one reason, but once the work actually starts, you usually learn a lot more about what they value. Sometimes the thing they cared about in the sales process ends up being secondary. Sometimes they get the most value from something you barely mentioned. Sometimes the same onboarding issue keeps coming up, or a result you didn’t expect becomes the thing they talk about most. That information should probably change how you market the business. But in a lot of companies, it never really makes it back upstream. Marketing is focused on getting the next customer. Sales is focused on closing the next deal. Delivery is focused on doing the work. Everyone is doing what they’re supposed to be doing, but the information that comes out of delivery often just stays there. That means the company keeps marketing based on what it thinks customers value instead of what actual customers are showing them they value. I think that’s where a lot of good proof gets wasted. A customer result can become a case study. A problem your team solved can become a useful story. Something a client says during onboarding can change the way you explain the offer. If the same outcome keeps coming up across different customers, that probably deserves to show up in the positioning somewhere. Even the bad parts are useful. If customers keep getting confused at the same point, that tells you something. If expectation",
+    "subreddit": "r/Entrepreneur",
+    "flair": "Growth and Expansion",
+    "link_domain": "self.Entrepreneur",
+    "labels": null
+  },
+  {
+    "id": "t3_1wm7jes",
+    "title": "I feel like the bad guy",
+    "body": "Had a 30 minute call with someone today and went through his app We talked through the product the offer and the marketing strategy And I gave him my honest opinion It wasnt all positive I pointed out where I thought the offer was weak where I thought the marketing would struggle and what I thought needed to change before he threw more time and money at it He actually took it really well and was grateful for the feedback But afterwards I sat there thinking did I actually help him or did I just kill his dream Ive been in business long enough now that I feel confident giving honest feedback but there is always that fine line between being helpful and being the person who tears someones idea apart Personally I would rather someone tell me the hard truth early than let me spend 6 months finding it out the expensive way But maybe thats just me Would you rather hear the hard truth about your business idea or would you rather someone encourage you and let the market decide",
+    "subreddit": "r/Entrepreneur",
+    "flair": "Lessons Learned",
+    "link_domain": "self.Entrepreneur",
+    "labels": null
+  },
+  {
+    "id": "t3_1wm6ga7",
+    "title": "Monday mentorship: ask anything | September 21, 2026",
+    "body": "New to entrepreneurship or just starting out? This is your space. Ask the questions you're afraid to ask elsewhere. Experienced folks, jump in and share what you wish someone had told you early on.",
+    "subreddit": "r/Entrepreneur",
+    "flair": "Weekly Discussion",
+    "link_domain": "self.Entrepreneur",
+    "labels": null
+  },
+  {
+    "id": "t3_1wm4hqd",
+    "title": "Is community/forum software still a good SaaS business to build?",
+    "body": "I've spent close to 20 years building and running online communities. Over that time, I've seen firsthand how valuable a good community can be for a business: customer conversations, peer support, feedback, retention, word of mouth, and a growing body of useful content. That background is what led me to build a SaaS in 2024: a white-label community/forum platform for businesses. I also liked the market for a few reasons: The category is already proven. There are established companies making serious revenue from community/forum software. Businesses already run communities across forums, Slack, Discord, Facebook Groups, etc. I believe useful human conversations will become more valuable as the web fills with AI-generated content. One of our product bets is that public community content should also help businesses get discovered through Google and AI search, rather than community being purely a retention/engagement tool. The business is profitable today, and we have a small number of customers who genuinely like the product. But there's one problem: Finding new customers is much harder than I expected. That has made me question something more fundamental than our marketing. Is community/forum software actually a good business to be in today? Do enough businesses genuinely care about owning a customer community to pay for dedicated software? Or is community one of those things companies like the idea of, but rarely consider important enough to prioritize and budget for? I keep wo",
+    "subreddit": "r/Entrepreneur",
+    "flair": "Bootstrapping",
+    "link_domain": "self.Entrepreneur",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnimgg",
+    "title": "Can somebody help me find something legit?",
+    "body": "Look. I‘m creative and interested in so many things. I have some mental issues though and I struggle a lot to find something that sticks and which I don‘t lose trust in after a few days. I don‘t drive and I don‘t have a kitchen that has a good standard for selling food. I tried selling some things I have sewn in the past and it worked but I didn‘t make profit. After calculating it‘s not worth it because I won‘t sell cheap stuff. I work in trades so I don‘t have a lot of experience with working online. I really need to get out of some debt and I also really want to fulfill the wish for a PC. It‘s gotten really frustrating. Does anybody have some ideas or would be willing to coach me a little bit? I would even pay something if you can really help me over a certain amount of time. I just need something to work on and that I‘m a little bit interested in and I have so much motivation. I‘m just not the business girl? 😅",
+    "subreddit": "r/sidehustle",
+    "flair": "Seeking Advice",
+    "link_domain": "self.sidehustle",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnn8uv",
+    "title": "Any recommendations for a side hustle i cam do during my commute?",
+    "body": "-about 2 hours a day by train -hoping to make $500 a year by 2028 -I don't have any existing skills (coding, etc) that I can build on -willing to invest $500 to get it started and can put in more down the road Not sure what other details could be helpful. Already doing investing to make money passively.",
+    "subreddit": "r/sidehustle",
+    "flair": "Looking For Ideas",
+    "link_domain": "self.sidehustle",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnijeo",
+    "title": "Sidehustle slowchat: What were your wins and fails this week?",
+    "body": "",
+    "subreddit": "r/sidehustle",
+    "flair": "",
+    "link_domain": "self.sidehustle",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnev88",
+    "title": "Storing a webshop's stock at home and posting their orders: this is what the work actually is. What is a fair fee per parcel?",
+    "body": "I build AirPost, a marketplace where a webshop in one EU country leaves a small amount of stock with a private person in another, and that person posts the orders locally. No link, per the rules. I am asking the side of this sub that would be doing the work, because I want the fee to be honest and right now I am guessing. What the work actually is, with no spin: A box arrives, 20 to 50 units, and it has to live somewhere dry. A shelf, a cupboard, part of a room. An order comes in and you have 24 hours to accept it, or it goes back to the shop automatically. You print a label, pack the item, and drop it at a parcel point or hand it to a courier. If it is not moving 24 hours after the label is bought, you get a reminder. At 48 hours the shop is told. After that they can pull the order back to their own address. You get paid per parcel, at a fee you negotiate with the shop per parcel size. Payout to your own bank account, minimum 10 euro, we take 3 percent of that payout. Nothing is paid for storage itself, only for parcels handled. That is a real downside and I am saying it here rather than hiding it. So, honestly: 10 to 15 minutes per parcel including the walk to the drop-off point, plus the space, plus being reachable. What I want to know from people who do physical side work: What is the fee per parcel below which you would not bother? I have seen proposals in the 1.50 to 3 euro range and I suspect the low end is insulting once the walk is counted. Should there be a monthly ",
+    "subreddit": "r/sidehustle",
+    "flair": "Seeking Advice",
+    "link_domain": "self.sidehustle",
+    "labels": null
+  },
+  {
+    "id": "t3_1wmk8u9",
+    "title": "Recommendations for handy 20/yr old?",
+    "body": "Looking for something just to make some extra cash. Worked on a farm since a young teen. Lot of variety of work. I’d consider myself fairly handy, have done some of everything, took a few trades classes in high school and did adjacent work at jobs. My current ambitions are beekeeping and gardening. Winter months are boring for me, and I’ll be out of a job this winter due to the seasonal nature of landscaping. Sick of job hopping since the farm closed down, and not looking for something full time, but enough to help pay for gas as I go to and from school. I am not in a situation where if it doesn’t work out, I don’t have enough money to get by. Would love some recommendations that aren’t too expensive to start out (or is reliable cash) and would love to hone in on some skills I’m less proficient in like woodworking, or plumbing, but open to all of it. Dream is to start a homestead someday, love that kind of work, but would also love to start learning now. Northern Illinois/Wisconsin area. I am open to gigs, but not jobs.",
+    "subreddit": "r/sidehustle",
+    "flair": "Looking For Ideas",
+    "link_domain": "self.sidehustle",
+    "labels": null
+  },
+  {
+    "id": "t3_1wmd0xz",
+    "title": "Recommendations for fairly easy to obtain certifications, licenses, etc.",
+    "body": "I’m a self-employed wedding photographer in the USA in a very seasonal market. I do small photoshoots and show in galleries during the winter months but there is still a lot of downtime. I’m not interested in a traditional part-time job during the slow period and I don’t want to go back to school. Since I’m not strapped for cash and have free time to study/research things I want to look into things I could do that require getting certified or licensed for without having to anything too intensive like get a full-blown degree. Any ideas?",
+    "subreddit": "r/sidehustle",
+    "flair": "Looking For Ideas",
+    "link_domain": "self.sidehustle",
+    "labels": null
+  },
+  {
+    "id": "t3_1wllgbr",
+    "title": "Would you keep a box of a webshop stock at home and ship its orders for EUR 1-2 per parcel?",
+    "body": "There is a model going around in Europe where small webshops leave a box of their bestsellers with someone local, and that person ships the orders: you get a ready-made label that is already paid for, you print it, and you drop the parcel at a point you walk or drive past anyway. Payment is per parcel, triggered by the carrier scan, paid out weekly. What it asks of you: an identity check, a printer, and being fine with a stranger stock sitting on a shelf. From what I can tell, people doing this in the Netherlands earn EUR 1-2 per parcel, and a busy shop is 5 to 15 parcels a week. So realistically EUR 10-30 a week for maybe 20 minutes of walking. Two honest questions: what per-parcel rate would make this worth your time, and which part would make you say no outright, the stock at home, the ID check, or the printer?",
+    "subreddit": "r/sidehustle",
+    "flair": "Seeking Advice",
+    "link_domain": "self.sidehustle",
+    "labels": null
+  },
+  {
+    "id": "t3_1wl3bw6",
+    "title": "Officiating (secular) weddings?",
+    "body": "I recently came into the idea of hosting secular weddings for a fee, and I'm looking to know if anyone has experience with something like that. I'm also a licensed social worker, and was thinking of the combined offer of a pre-wedding counseling session with the package. Any advice or thoughts?",
+    "subreddit": "r/sidehustle",
+    "flair": "Looking For Ideas",
+    "link_domain": "self.sidehustle",
+    "labels": null
+  },
+  {
+    "id": "t3_1wis5r8",
+    "title": "My side hustle makes ~$4,000/month and I still can't tell you how to repeat it",
+    "body": "I've dropped bits of this in comments before and people kept asking for the full thing, so here it is. Quick disclaimer first, because I think it matters. I don't have a repeatable formula. If I did, I'd have built ten more of these and I wouldn't be posting on Reddit. A lot of \"founder stories\" are packaged as if the person cracked a system, and that packaging is usually the actual product they're selling you. What I have is one thing that worked, a couple that didn't, and some things I'd think about differently now. What worked I'm a full-stack dev from Hungary. In March 2022, Wordle was everywhere, and I thought \"what if it was actors instead of words.\" Built actorle.com in three days, posted it on Reddit, and got told it was \"insanely hard\" and \"literally unplayable\" (John Hurt was missing from the database. Fair.) I nearly deleted it that weekend. A week later a small British humor site put it in their newsletter and things went sideways fast. Twitter, then Mashable, 500 daily users to tens of thousands. I stuck a Buy Me a Coffee button on it and got about $1,000 in three months, which blew my mind at the time. Then I added display ads, and at some point the ad income matched my salary. So I quit. Four and a half years later it still does ~10k daily users and around $4k/month. A few hours of maintenance a month. Last year I finally switched ad providers after putting it off forever because \"it already works,\" and revenue roughly doubled. Laziness had been costing me real",
+    "subreddit": "r/sidehustle",
+    "flair": "Success Story",
+    "link_domain": "self.sidehustle",
+    "labels": null
+  },
+  {
+    "id": "t3_1wixe7x",
+    "title": "Side hustle Advice/Burnout",
+    "body": "What advice or side-hustles would you recommend for someone who occasionally reaches burnout? I (35) work 2 jobs, 12 to 16 hours days for 6 to 7 days with no overtime or promotion options. I have $5,600 in student loan debt left, down from $43,000. Im also on Upwork but have tried other online and offline platforms like Redbubble, my own art shop, Uber, and even O-F with little to no success. No subscriptions, pets or kids. I eat fast food 1-2 times a week with rewards and coupons, I rarely buy myself anything or treat myself. I live with family, helping out with bills and utilities. I’m determined to be debt-free but I occasionally feel burnout. What advice or side-hustles would you recommend? Any advice would be greatly appreciated. Thank you.",
+    "subreddit": "r/sidehustle",
+    "flair": "Seeking Advice",
+    "link_domain": "self.sidehustle",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnj0l8",
+    "title": "PSA- GPT-6 Sol Just Launched. ChatGPT Plus Still Can’t Use GPT-6 in Regular Chat.",
+    "body": "Update: GPT-6 Sol is NOT coming to regular ChatGPT Chat in today’s release. Plus and Pro get it in Work and Codex only. I posted recently about Plus subscribers getting GPT-6 Astra in Work and Codex but not regular Chat. Some people thought the GPT-6 Sol release might finally bring a GPT-6 model to normal Chat on Plus. OpenAI’s September 22 announcement answers that directly: “In ChatGPT, the models are available in Work and Codex, but not Chat.” That applies to Sol and Luna. Sol is rolling out to Plus and Pro subscribers, but neither plan gets Sol in regular Chat through this release. That leaves Plus subscribers without a GPT-6 model in the normal Chat model picker. Work and Codex access does not fix that. People pay for ChatGPT Plus to use ChatGPT, and once again the new model is being kept out of regular Chat. OpenAI has not said Sol will never come to Chat. But this release does not bring it there, and OpenAI has given no date for when it might. OpenAI’s September 22 changelog",
+    "subreddit": "r/ChatGPT",
+    "flair": "News 📰",
+    "link_domain": "self.ChatGPT",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnielg",
+    "title": "GPT 6 Luna Max scores as high as GPT 6 Sol High and Astra Low whilst being 3x cheaper than GPT 6 Sol and 7.3x cheaper than Astra on DeepSWE",
+    "body": "",
+    "subreddit": "r/ChatGPT",
+    "flair": "News 📰",
+    "link_domain": "reddit.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnh9bo",
+    "title": "GPT 6 Sol and Luna are here",
+    "body": "",
+    "subreddit": "r/ChatGPT",
+    "flair": "News 📰",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wncn39",
+    "title": "My mum is lonely and turning to ChatGPT to fill the void",
+    "body": "Almost 5 years ago my stepdad died, and my mum now lives alone (+ 2 cats). Since then, ChatGPT has become a thing. My mum uses it for work, so it’s on her laptop, phone and iPad, which is fine. However, outside of work, she uses it for everything, be it writing letters, heart-felt birthday messages to us, recipes, fixing things etc, but more recently it’s for general chatting and emotional outlet. She has given it a name, sends it selfies asking for opinions on outfits and hairstyles, and says good morning / night to it. Recently she has enquired with it as to whether she can make it speak to her using my stepfather’s voice, re-created from videos. My brother and I are starting to become a little concerned, and when we have brought it up to her that it’s just AI, she says she knows, but it’s nice to just have someone to talk to in the evenings. She doesn’t have many friends, and my siblings and I live at least 100 miles away, but visit and call as often as we can. She’s not too sociable so wouldn’t want to join clubs etc. My question is - how, or should, we help her take a step back from it? If it’s helping with her loneliness, is it such a bad thing? Or do we let her just become dependent on AI to fill the void of my late stepfather? We don’t know what to do. Any advice welcome, please kind comments only, she’s just a wife who misses her husband and we want the best for her.",
+    "subreddit": "r/ChatGPT",
+    "flair": "Serious replies only :closed-ai:",
+    "link_domain": "self.ChatGPT",
+    "labels": null
+  },
+  {
+    "id": "t3_1wmxjs0",
+    "title": "We almost let my dad sleep through a stroke. ChatGPT is the reason we didn’t.",
+    "body": "I keep replaying that night in my head because we came way too close to doing nothing. We were eating dinner when my dad dropped his chopsticks. He picked them up, dropped them again, then got annoyed when we started staring at him. He said his right hand just felt a little numb and told us to stop making a big deal out of it. Then I noticed his mouth looked strange when he talked. Not dramatically drooping, just... off. His words sounded thicker than usual too. When he stood up, he had to grab the back of the chair for a second. My mom thought maybe his blood pressure was low. My dad insisted he was tired and wanted to go lie down. I thought something was seriously wrong, but nobody could agree on what to do and he was getting angry at all of us for panicking. The most confusing part was that a few minutes later he looked better. That almost settled it. My dad was already walking toward the bedroom, saying he would sleep it off, while my mom was telling me we could check on him in the morning. I was standing in the kitchen searching everything on my phone, mostly hoping to prove to myself that I was overreacting. I typed the symptoms into an AI health assistant exactly as they had happened: dropped things with his right hand, numbness, mouth looked uneven, speech sounded weird, lost his balance for a second, now seemed better. The response basically screamed: possible stroke or TIA, emergency care now, do not wait even if the symptoms are going away. I read it out loud. My d",
+    "subreddit": "r/ChatGPT",
+    "flair": "Use cases",
+    "link_domain": "self.ChatGPT",
+    "labels": null
+  },
+  {
+    "id": "t3_1wngih9",
+    "title": "New GPT 6 Family Release Dropping",
+    "body": "",
+    "subreddit": "r/ChatGPT",
+    "flair": "News 📰",
+    "link_domain": "self.ChatGPT",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnofdv",
+    "title": "Me: “What’s 2 + 6?” ChatGPT: “Yep. I’ll keep this grounded in your actual question rather than wandering into math goblin territory.”",
+    "body": "It keeps reassuring me that it’s going to do the obvious thing I asked for by contrasting it with some bizarre alternative it came up with on its own.",
+    "subreddit": "r/ChatGPT",
+    "flair": "Funny",
+    "link_domain": "self.ChatGPT",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnk39p",
+    "title": "I used ChatGPT to fix an ancient PC baseball game",
+    "body": "I’ve been trying on and off forever to get Triple Play 2001 running on a modern PC (don’t judge me, I loved the HR derby) I’ve tried compatibility modes, an XP VM, different ways of mounting the disc, patches and fixes I found online…Nothing worked. Today I said fuck it and decided to see what ChatGPT could do . Several hours and an absurd number of increasingly random fixes later, the fucking game works. I already had the game installed, but whenever I tried launching it nothing happened, it would crash straight to desktop. It had me upload logs from programs I didn’t even know existed. It identified an issue, made a fix, and I tried it. We got past the immediate crash only for the game to tell me I had a “0 bit desktop” and needed DirectX 6. I already had dgVoodoo installed from prior attempts at getting it to work, but it had me change one setting Then it would start launching, change my resolution, go black and crash. Still progress. More Process Monitor logs and crash dumps uploaded. Eventually it narrowed the problem down enough that it was messing with the game’s old renderer DLLs. I’m not nearly computer literate enough to know what exactly it was doing, but it kept giving me new fixes Right before I had to go pick up my daughter I got one last file, put it in the right directory and the game launched perfectly. I can’t actually say if I can play it, since I haven’t been home yet to try, and I know most people don’t give a damn about a fix for an ancient sports game. ",
+    "subreddit": "r/ChatGPT",
+    "flair": "Other",
+    "link_domain": "self.ChatGPT",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn0rqp",
+    "title": "If your a pc gamer, Astra can make mods for you in games.",
+    "body": "If you’ve ever had a game where you can’t find any mods for it to give it quality of life, then Astra can do it for you. I only use this for very old games that came out in the 2000s. For example: I downloaded the Incredible Hulk 2008 from abandonware. The game does not support 3440 x 1440 resolution at all. I couldn’t find any mods for the game online that make a fix for this. So I asked Astra and it made one and now the game is in that resolution and it’s ultrawide. It took about 3 tries for it to get it right. First try the game was not launching due to a non compatible resolution. Astra magically bypassed that with the second chat. The third chat I had Astra fix the screen stretch. It was making things go off the screen so it put everything back by comparing the original ui and matching it to scale with the custom resolution. It really does wonders for old games. And maybe it could help you make a mod for any game that no one has made before. Pretty cool stuff!",
+    "subreddit": "r/ChatGPT",
+    "flair": "GPTs",
+    "link_domain": "self.ChatGPT",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn5p2o",
+    "title": "PSA: past a certain length, ChatGPT doesn't read your PDF, it searches it, and never tells you which one happened",
+    "body": "Upload a short file and ChatGPT reads all of it. Upload a long one, a contract, a thesis, a 200 page report, and most of it goes into a search index instead. Every answer is then built from whichever chunks match the words in your question. Nothing in the interface tells you which of the two happened. The answer reads just as confident either way. I learned it asking for a summary of a long agreement. The summary was clean and it missed the one clause I actually needed, near the end, because nothing in \"summarize this\" pointed the search at it. When I asked about that clause by name, it found it immediately. What works: Ask about sections by name or page, not the whole file. \"What does section 9 say about termination\" pulls the right chunk. \"Summarize this\" pulls whatever it happens to rank. For a real summary of a long file, go section by section. \"Summarize pages 1 to 20\" and so on. More messages, but every part actually gets read. Ask what it didn't see: \"Which sections of this file did you not use for that answer?\" It's often honest about it. Split long files before uploading when you need the whole thing read. Several shorter files get read far more completely than one long one. The short version: a short file is read, a long file is searched. Ask questions a search can answer. Disclosure: I build AI Toolbox, a Chrome extension that adds search, folders and export to ChatGPT. Its search works on your chats, not on uploaded files, so this one is all native behavior. What'",
+    "subreddit": "r/ChatGPT",
+    "flair": "Gone Wild",
+    "link_domain": "self.ChatGPT",
+    "labels": null
+  },
+  {
+    "id": "t3_1wng4s6",
+    "title": "Does anyone else preemptively decide they’ll be too tired to do things before they’ve even happened?",
+    "body": "I’m trying to break a pattern where I look at my schedule for the next few days and immediately start predicting how exhausted I’m going to be. For example, I found out I have dinner tonight, need to go into the office tomorrow, and may have another work commitment Thursday. My immediate thought was, “There’s no way I’m going to have the energy to work out any of these days.” The weird thing is…I’m already telling myself I’m tired today, and I haven’t even left my apartment yet. It feels like I mentally experience all of my upcoming obligations at once and decide in advance that I won’t have enough energy for anything else. Then I end up skipping workouts or other things that would probably make me feel better because I’ve already convinced myself I’m going to be exhausted. Does anyone else do this? Is it an all-or-nothing/productivity thing, anxiety about having too much on your plate, or something else? More importantly, what has actually helped you stop predicting your energy levels days in advance and just deal with each day as it comes?",
+    "subreddit": "r/productivity",
+    "flair": "Question",
+    "link_domain": "self.productivity",
+    "labels": null
+  },
+  {
+    "id": "t3_1wmpu81",
+    "title": "I genuinely do nothing all day",
+    "body": "I literally do nothing all day every day. Wake up, feel like shit, scroll on my phone, smoke if I don’t have class, watch videos on my tv, get bored and doomscroll on my phone, go to class and play solitaire, go to work and do jack shit, skip the gym, eat some bs, smoke, rot, get bad sleep, repeat. I’m actually a chud I don’t do anything I’m a 22 year old college student and things should be going so well for me but I’m just so lazy right now. I was the man in high school and early university but now I just lay around and procrastinate. Not super sure what to do about it, like I want to “lock in” and be super me again but that just sounds miserable.",
+    "subreddit": "r/productivity",
+    "flair": "Advice Needed",
+    "link_domain": "self.productivity",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn329b",
+    "title": "I woke up early after 8.5 hours of slee- still feeling sleepy",
+    "body": "Hi, recently I decided to change my sleeping habits so I exhausted myself at slept at around 9;30. I woke up at 6 am i.e. after 8.5 hours of undisturbed sleep. And I am STILL feeling so sleepy!! I don't hav vitamin deficiencies as keep them in check. Why am I feeling sleepy even after sleeping for 8.5 hours? Moreover, how to fix this?",
+    "subreddit": "r/productivity",
+    "flair": "Question",
+    "link_domain": "self.productivity",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnabvb",
+    "title": "How do I become more productive as a high school student? I genuinely don't do anything nowadays",
+    "body": "I'm a high school student, and since the beginning of this year I have no motivation to study and always procrastinate other tasks aswell. Tbh I understand most things that are being taught, but can't seem to put it to use when needed. I also like reading books, drawing/sketching and going for walks/jogs. I have a guitar aswell but never really learnt to play it properly just bcoz of my laziness. As for days I'm at home, I wake up, feel like shit, scroll on my phone, watch videos on my tv, get bored and doomscroll on my phone, eat some bs, rot, get bad sleep, repeat. I also tend to become distracted easily when doing anything, and not just because of phones/ screens. I'm also bad at managing my time. I really want to change my lifestyle/habits to become a better version of myself and correct all my flaws. Any advice for this will be greatly appreciated!",
+    "subreddit": "r/productivity",
+    "flair": "Advice Needed",
+    "link_domain": "self.productivity",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn4urv",
+    "title": "I have an aversion to studying",
+    "body": "Hey, I am 20f, and I am a pre-med major at university. Right now, I have pretty hard classes like organic chemistry and microbiology. Exams are coming up, yet I don't really feel that much urgency or drive to get good scores. I don't want to go through the discomfort of studying for long periods when I could be doing more entertaining things. These things would include hanging out with friends, doing something active or watching random things online. My brain is still in summer mode and is chasing whatever gives me the most dopamine. I have lost a lot of my discipline and drive lately. I've heard I need to romanticize studying, but I don't know how to do that. I find that taking action with other productive things (like volunteering at hospitals, creating clubs, making connections, etc.) is much more fun. I used to really like the drive in studying, but my brain refuses to do it, now that summer has convinced me that there are more \"fun\" things to do. Now, studying doesn't really cut it for me anymore, but I need to if I want to make it to med school. What would get me back into liking studying? How do I romanticize it? Any resources? How do I unhook myself from instant hits of dopamine? I need to get on the grind quickly, or I am cooked.",
+    "subreddit": "r/productivity",
+    "flair": "Advice Needed",
+    "link_domain": "self.productivity",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn92eh",
+    "title": "What workflow on your computer requires 3+ things every time?",
+    "body": "I'm interested in workflows rather than individual shortcuts. For example, \"start working on project X\" might mean opening a repo, terminal, several services, browser tabs, dashboards, Slack, etc. None of these actions are particularly difficult individually, but the whole sequence can become repetitive. What's a workflow you do repeatedly that requires jumping between multiple apps, windows, websites or tools? And have you actually automated it somehow, or do you just do it manually?",
+    "subreddit": "r/productivity",
+    "flair": "Question",
+    "link_domain": "self.productivity",
+    "labels": null
+  },
+  {
+    "id": "t3_1wmw4q5",
+    "title": "what to do when you are bored and cant be on your phone?",
+    "body": "I work at a small gym that has about 7 people on a busy hour so its really quiet, the people who workout there are pretty organized so they hardly ever leave stuff around, they already know their routines so I hardly ever need to coach them around and they are usually already accustomed to the exercises so I dont have to fix their forms WHAT THE HELL DO I DO??? I spend 7 hours there and for 4 of those hours there's nothing Recently i got the information that I am very liked there but my only problem is that I am on my phone a lot (I seem to have real bad luck because as soon as I grab it someone needs help) i try to stay on my phone as little as possible and never be glued to the screen unless if there's 0 people there which they have no problem with doomscrooling on days like that, but truly 70% of the time there is just.... sitting down and watching the clock tick, i have major anxiety problems so being on my head all that time is real bad, they encourage us to always chat, people in there are quite chatty but im the only person below 30 there and the only guy, so the chats are just women in their late 40s talking about things I never heard of or dont interact with, like the latest soap opera or gossip about people i don't know, i can only bullshit a quick interaction so much, by the end of the day im so mentally tired that I struggle to keep up at college because ive been in my head for so much time that I rather really just turn off, long story short, can't be on phone, w",
+    "subreddit": "r/productivity",
+    "flair": "Advice Needed",
+    "link_domain": "self.productivity",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn23z6",
+    "title": "I have some extreme level of phone addiction dispute having my day packed... I desperately ask for some advice.",
+    "body": "I have been way too stuck to my phone since the last 4 years it began in 9th grade and it has come up to my 12th grade, I have consistently watched my phone for over 12-13+ (social apps, codm, Reddit, Instagram etc) hours everyday, other than the few days every few months where I would go on a vacation or hangout with my friends. It's become too much and I have been conscious of it for 2 years and even then I scroll/do bullshit while being concious of the fact that I'm doing it, I have tried to progressively reduce screen time and it hasn't worked, I have procrastinated for my exams, and everything that was ever important to me. It has become bad that even when there are 1-2 hours left for whatever I'm procrastinating on I still watch my fucking phone to hopefully make the stress go away, I have tried to give my phone to my parents but that's not really possible cause I travel everyday from one place to another and while I could carry cash and use bus most of these guys don't keep change or anything and getting a ride without an appointment is basically impossible without the driver keeping the price almost 2x the original. I have my day packed from 6am to 5pm and even then I watch the phone in between or in the classes, or after coming home I keep scrolling until 2-3am. I'm 18 rn, and I will be home it's not a problem of being unsocial or anything I'm in 2 different clubs travel and sports as well I go to the gym from 6 am to 7am every single day and even go for a run every ",
+    "subreddit": "r/productivity",
+    "flair": "Advice Needed",
+    "link_domain": "self.productivity",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnet1d",
+    "title": "Need help in building a realistic timetable",
+    "body": "Hi, Am a student prepping for exams. I’m trying to build a proper daily routine and would be really happy and grateful for some of your suggestions. My fixed timings are: Breakfast: 7:30 AM Classes: 8:00 AM – 1:45 PM Workout: 1.5 hours, preferably in the evening Self-study: 6–6.5 hours Sleep: At least 7 hours Also need to fit in lunch, dinner, shower/getting ready, and walking/commuting. Could you suggest an actual hour-by-hour timetable for this? I’d like to know what time I should wake up, when I should study, when I should work out, and when I should sleep. I’m okay with waking up early if that makes the schedule work. I just want the whole thing to be realistic and sustainable rather than having every minute of the day packed. Would really appreciate it if someone could share how they would structure this.",
+    "subreddit": "r/productivity",
+    "flair": "Advice Needed",
+    "link_domain": "self.productivity",
+    "labels": null
+  },
+  {
+    "id": "t3_1wngzm6",
+    "title": "I built a time tracker for myself",
+    "body": "got tired of losing time switching between design tools last year, ofc when u r a freeIance designer work just keeps sneaking into ur evenings, and u Iose ur time in a bIink of an eye… so i’ve buiIt a tiny app that Iogged my active windows and Iet me tag them by project. shared it on GitHub just for fun, but it tables up unexpectedly -over 150k instaIIs, 3k GitHub stars, and ppl started sending pull requests and feature requests! Some companies asked to license it, but I realized I didn't wanna seIl it, i wanted to make it good af. So last month I quit my job w no backup plan, just an app and a tiny belief that it’ll solve a real problem.",
+    "subreddit": "r/productivity",
+    "flair": "Advice Needed",
+    "link_domain": "self.productivity",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnmzal",
+    "title": "Trump Official Bluntly Tells Americans To Change Their Diet If Beef Prices Are Too High",
+    "body": "",
+    "subreddit": "r/politics",
+    "flair": "No Paywall",
+    "link_domain": "huffpost.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnevr3",
+    "title": "Trump’s Crazed U.N. Speech Met With Silence and Walkouts",
+    "body": "",
+    "subreddit": "r/politics",
+    "flair": "Possible Paywall",
+    "link_domain": "newrepublic.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wndty0",
+    "title": "'Incredible Story of Corruption': Bombshell Report Puts Susan Collins at Center of Massive Bribery Scheme",
+    "body": "",
+    "subreddit": "r/politics",
+    "flair": "No Paywall",
+    "link_domain": "commondreams.org",
+    "labels": null
+  },
+  {
+    "id": "t3_1wngx76",
+    "title": "Susan Collins Was Target of Federal Bribery Case … Until Trump Gutted the FBI",
+    "body": "",
+    "subreddit": "r/politics",
+    "flair": "Possible Paywall",
+    "link_domain": "rollingstone.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wndczg",
+    "title": "FBI Was Targeting Susan Collins in Bombshell Bribery Probe—Until Trump | The FBI was investigating a pay-to-play scheme involving Senator Susan Collins and a top donor. Then Trump was elected and the investigation disappeared.",
+    "body": "",
+    "subreddit": "r/politics",
+    "flair": "",
+    "link_domain": "newrepublic.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn91ft",
+    "title": "‘North Korea Type S**t’: New Trump TV Slammed As Instant ‘Global Embarrassment’",
+    "body": "",
+    "subreddit": "r/politics",
+    "flair": "No Paywall",
+    "link_domain": "huffpost.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnajgv",
+    "title": "FBI Bribe Probe Into Must-Win Republican Senator Is Exposed",
+    "body": "",
+    "subreddit": "r/politics",
+    "flair": "Possible Paywall",
+    "link_domain": "thedailybeast.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnhlyu",
+    "title": "Trump says AI will be renamed ‘super intelligence’ in all US documents",
+    "body": "",
+    "subreddit": "r/politics",
+    "flair": "No Paywall",
+    "link_domain": "thehill.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnjota",
+    "title": "AOC refuses to rule out run against Senate leader Chuck Schumer",
+    "body": "",
+    "subreddit": "r/politics",
+    "flair": "No Paywall",
+    "link_domain": "theguardian.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wna5k8",
+    "title": "Trump Press Ban Backfires as Aides Leak Humiliating Motive Behind It",
+    "body": "",
+    "subreddit": "r/politics",
+    "flair": "Possible Paywall",
+    "link_domain": "newrepublic.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnevnd",
+    "title": "‘We Hacked the FBI:’ Hackers Say They Have Data on All FBI Employees",
+    "body": "",
+    "subreddit": "r/technology",
+    "flair": "Security",
+    "link_domain": "404media.co",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn7qdj",
+    "title": "Engineer says Claude Code has made his job \"soul-sucking\" as workers spend 12-hour days pressing enter",
+    "body": "",
+    "subreddit": "r/technology",
+    "flair": "Artificial Intelligence",
+    "link_domain": "techspot.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn5qva",
+    "title": "EPA unlawfully canceled $7B Solar for All program, judge rules",
+    "body": "",
+    "subreddit": "r/technology",
+    "flair": "Energy",
+    "link_domain": "smartcitiesdive.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnj7ot",
+    "title": "Discord reveals age-check rollout with massive changes to how it works",
+    "body": "",
+    "subreddit": "r/technology",
+    "flair": "Social Media",
+    "link_domain": "dexerto.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnii6k",
+    "title": "IT mistake erases 11 years of viewing history for hospitals’ maternity records",
+    "body": "",
+    "subreddit": "r/technology",
+    "flair": "Society",
+    "link_domain": "arstechnica.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnfo05",
+    "title": "Jobless tech workers are being left out of San Francisco’s AI boom",
+    "body": "",
+    "subreddit": "r/technology",
+    "flair": "Artificial Intelligence",
+    "link_domain": "seattletimes.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnjcz2",
+    "title": "Lawsuit: OpenAI hid mass shooter’s chat logs to avoid outing other violent users",
+    "body": "",
+    "subreddit": "r/technology",
+    "flair": "Artificial Intelligence",
+    "link_domain": "arstechnica.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnm9oh",
+    "title": "'We screwed up': Doordash admits underpaying New York workers",
+    "body": "",
+    "subreddit": "r/technology",
+    "flair": "Business",
+    "link_domain": "bbc.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnhri5",
+    "title": "DoorDash to pay $131M for underpaying delivery workers in New York City",
+    "body": "",
+    "subreddit": "r/technology",
+    "flair": "Business",
+    "link_domain": "abcnews.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn5syf",
+    "title": "Acer CEO says PC prices could fall by 2027, accuses rivals of milking the RAM shortage for profit",
+    "body": "",
+    "subreddit": "r/technology",
+    "flair": "Hardware",
+    "link_domain": "techspot.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnmkb5",
+    "title": "Copito when I found her and copito now",
+    "body": "",
+    "subreddit": "r/aww",
+    "flair": "",
+    "link_domain": "reddit.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wng85t",
+    "title": "The glittery eyeliner and luxurious lashes I discovered in my hummingbird macro photos.",
+    "body": "",
+    "subreddit": "r/aww",
+    "flair": "",
+    "link_domain": "reddit.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnet6n",
+    "title": "Charlotte is the best thing that has happen to me🥰",
+    "body": "",
+    "subreddit": "r/aww",
+    "flair": "",
+    "link_domain": "reddit.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnj9lm",
+    "title": "[OC] Looks like this car came with a built-in assistant mechanic team.",
+    "body": "",
+    "subreddit": "r/aww",
+    "flair": "",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn7qzh",
+    "title": "Whent to get a shower this morning and heard a noise in vent. And out came this little guy. He ain't mine lol idk how he got in",
+    "body": "",
+    "subreddit": "r/aww",
+    "flair": "",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnmag9",
+    "title": "Well I foster failed but how could I separate Big Baby Jim (black) and Mac (tabby)",
+    "body": "",
+    "subreddit": "r/aww",
+    "flair": "",
+    "link_domain": "reddit.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnewab",
+    "title": "Young red squirrels in a tree",
+    "body": "",
+    "subreddit": "r/aww",
+    "flair": "",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnkr3y",
+    "title": "Chonky paws",
+    "body": "",
+    "subreddit": "r/aww",
+    "flair": "",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn9zxo",
+    "title": "The handsome Jake from our shelter. He didn’t like us when he came in but now he loves getting petted ❤️❤️❤️",
+    "body": "",
+    "subreddit": "r/aww",
+    "flair": "",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn829m",
+    "title": "Our family grew by four paws. We are so incredibly happy to welcome this little girl into our family. Our hearts are completely melted! 🐾❤️",
+    "body": "",
+    "subreddit": "r/aww",
+    "flair": "",
+    "link_domain": "reddit.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn9mnt",
+    "title": "Dog wanted cuddles after nightmare",
+    "body": "Just something cute to share :) My pup was having a bad dream last night (really whining and shaking), so I gave her some light pets and softly called her to wake her up. Almost immediately she ran up the bed (yes, she sleeps in my bed please no judgment on that it's better for us that way) and laid down on me. She got her head nice and comfy and instantly started snoring again lol. She's not a tiny dog by any means, but I'll let her lay on top of me any time she feels she needs it. She's already a very cuddly dog, but this was extra sweet, and she spent the rest of the night being extra close. Just made my heart melt a little, I love her so much :)",
+    "subreddit": "r/dogs",
+    "flair": "[Fluff]",
+    "link_domain": "self.dogs",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnj2y4",
+    "title": "Do you get offended when people are repulsed/standoffish of your dog(s)?",
+    "body": "I have no problem with dogs, I just don't want them licking and smelling me. Today I was in the lift/elevator in my apartment block and the neighbours children came in with their very big dog who was jumping to smell me, tye elevator was small so there was no way I could get away from it and I freaked out and said \"I'll take the stairs!\" And shot out tye other door. I never talk to them and don't intend to but I don't want to be offensive. I would've acted more chill but it caught me off guard.",
+    "subreddit": "r/dogs",
+    "flair": "[Fluff]",
+    "link_domain": "self.dogs",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnm1vf",
+    "title": "Anyone ever board their dog for 2 weeks? How were they afterwards?",
+    "body": "We may have a need to board our dog for 2 weeks. Has anyone done this? How were they afterwards?",
+    "subreddit": "r/dogs",
+    "flair": "[Misc Help]",
+    "link_domain": "self.dogs",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnmqhk",
+    "title": "Day 2 and already failing",
+    "body": "I got the first doggo in my life yesterday - a cute little 3m old chihuahua and i feel like im already failing. I started with a big mistake and gave him the wrong dry food (ik u should mix his regular food with the new one if u wanna change it) but i just rly thought im giving him his regular one. He ended up throwing up twice and feeling down, i got SO stressed i rushed him to the vet, they put him some injections so he can feel better. I felt retarded and guilty af. Later that day lil bro went full nuts and decided to JUMP of the couch and hit his head on the table (i know i should protect his lil fragile head, especially when hes a baby). Thank god he acted like nothing happend and hes fine. Mind u, ive been sitting on this couch with him ALL DAY to protect him from falling, jumping, hurting, ect, still he managed to do it the 2 seconds i wasnt paying attention to him. The happiness this little creature gives me is equal to the stress i get from it. Id appreciate if someone gives me tips and shares stories of their fails so i dont feel like a complete garbage ✨",
+    "subreddit": "r/dogs",
+    "flair": "[Misc Help]",
+    "link_domain": "self.dogs",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnm8xq",
+    "title": "Cosa avete comprato nel primo anno col cucciolo che si è rivelato inutile, o che avete dovuto ricomprare?",
+    "body": "Ciao a tutti! Sto raccogliendo esperienze di chi ha preso un cane negli ultimi anni, e sono curioso di una cosa precisa: gli acquisti andati male, visto che a breve arriverà il mio amico a 4 zampe Qualcosa che avete comprato per il cucciolo e che non ha funzionato, si è rotto subito o avete buttato Qualcosa che avete dovuto ricomprare più volte Un problema per cui alla fine vi siete arrangiati con una soluzione fai da te, perché niente di quello che c'era in commercio andava bene Sono solo domande per cercare di capire come muovermi grazie per la disponibilità",
+    "subreddit": "r/dogs",
+    "flair": "[Behavior Problems]",
+    "link_domain": "self.dogs",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn552c",
+    "title": "Uhhh…I think my dog can read my lips.",
+    "body": "She usually hops up onto my bed when my alarm goes off and snuggles for 9 minutes while I hit snooze, and then we go outside. This morning I noticed her watching me as I laid in bed, so I mouthed the words “do you want to go outside?” She immediately got excited and wagged her tail. So I tested it by mouthing a bunch of random phrases like “good morning,” “how did you sleep,” “can you understand me,” and she didn’t react. So I mouthed “do you want to go outside?” again and she immediately titled her head, wagged her tail and got excited. Maybe I’m imagining it bc it’s not even 6am yet where I live, but also it makes sense because I remember hearing somewhere that dogs are better at learning and understanding visual cues.",
+    "subreddit": "r/dogs",
+    "flair": "[Fluff]",
+    "link_domain": "self.dogs",
+    "labels": null
+  },
+  {
+    "id": "t3_1wmujxr",
+    "title": "Strange and disturbing behavior from my dog",
+    "body": "My husband died 6 years ago. Today I put an old spread on my bed that I hadn’t used since his passing. My dog sniffed all over the top and sides and became very agitated. She also paced and rubbed along the edges that hung down. This went on for about an hour before I could settle her. Do you think she was smelling/ remembering him? It was a little upsetting.",
+    "subreddit": "r/dogs",
+    "flair": "[Behavior Problems]",
+    "link_domain": "self.dogs",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnlaoa",
+    "title": "Eurasier needs groomer visit | has separation anxiety",
+    "body": "Hello! I need advice about my dog. He really needs to visit a groomer. As the title says he has separation issues and he's scared of almost everything. I found a groomer that specializes in double coated fur but she insisted on me not being there when I tried to make an appointment. I told her to let her know after some thoughts about it. Maybe she is right but wanted to hear from other people who have been in the same situation. Could also be that I'm the one with the separation issue. In general he's not aggressive but will make a stand when he's being touched by me with a brush on his belly. Other places are fine. Advice is more than welcome.",
+    "subreddit": "r/dogs",
+    "flair": "[Misc Help]",
+    "link_domain": "self.dogs",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn6xzl",
+    "title": "My dog is very attached to his bed.",
+    "body": "My dog (7lb Yorkipoo) has two beds in our house. During the day, both are downstairs. He is free to use either, but he almost exclusively uses this one bed. At night, this bed is moved upstairs so he can sleep. The thing is, he seems extremely attached to this bed. Regardless of what he is doing, he will follow the bed if it’s being moved somewhere else. He’ll even follow me to the basement (where he never goes otherwise) if I am taking that specific bed to the laundry room. He never does this with his other bed or any other object. Is this normal?",
+    "subreddit": "r/dogs",
+    "flair": "[Behavior Problems]",
+    "link_domain": "self.dogs",
+    "labels": null
+  },
+  {
+    "id": "t3_1wmqkkg",
+    "title": "Odd/Quirky commands you use instead of the standard?",
+    "body": "Waiting on getting my puppy and plan on working extensively with a trainer from day 1 and I’m just kinda curious what are some of the different ways you’ve relabeled or hand signals used or others with your dogs. For example go potty I can’t stand idk why it pisses me off so I plan on saying do your business I’ve seen people use different languages, hand signals, funny/cute/quirky terms different than the standard command and I’d love to hear what people are doing?",
+    "subreddit": "r/dogs",
+    "flair": "[Misc Help]",
+    "link_domain": "self.dogs",
+    "labels": null
+  },
+  {
+    "id": "t3_1wniq8j",
+    "title": "Which profession is overrated and doesn’t deserve the credit (nor the money) its professionals get?",
+    "body": "",
+    "subreddit": "r/AskReddit",
+    "flair": "",
+    "link_domain": "self.AskReddit",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn3itv",
+    "title": "“The best parents are the parents before they have kids.” What is a real life example you’ve seen of this?",
+    "body": "",
+    "subreddit": "r/AskReddit",
+    "flair": "",
+    "link_domain": "self.AskReddit",
+    "labels": null
+  },
+  {
+    "id": "t3_1wndene",
+    "title": "what’s the wildest thing you’ve done to yourself?",
+    "body": "",
+    "subreddit": "r/AskReddit",
+    "flair": "",
+    "link_domain": "self.AskReddit",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn58q7",
+    "title": "What's your biggest flex that you can't tell anybody?",
+    "body": "",
+    "subreddit": "r/AskReddit",
+    "flair": "",
+    "link_domain": "self.AskReddit",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnlfmg",
+    "title": "What movie did you watch as a kid that traumatized you the most and you still can’t watch it as an adult?",
+    "body": "",
+    "subreddit": "r/AskReddit",
+    "flair": "",
+    "link_domain": "self.AskReddit",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnn0bd",
+    "title": "Have you ignored illnesses due to the cost of American healthcare? What was it? How much was it costing you?",
+    "body": "",
+    "subreddit": "r/AskReddit",
+    "flair": "",
+    "link_domain": "self.AskReddit",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnc20b",
+    "title": "[SERIOUS] People who have lost a pet: How did you deal with the grief?",
+    "body": "",
+    "subreddit": "r/AskReddit",
+    "flair": "Serious Replies Only",
+    "link_domain": "self.AskReddit",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnovcs",
+    "title": "People that grew up being poor, what did you believe was a luxury?",
+    "body": "",
+    "subreddit": "r/AskReddit",
+    "flair": "",
+    "link_domain": "self.AskReddit",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn7ap0",
+    "title": "What changes did your body go through in your 30s?",
+    "body": "",
+    "subreddit": "r/AskReddit",
+    "flair": "",
+    "link_domain": "self.AskReddit",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn7ig3",
+    "title": "What’s one slang term you’re completely over in 2026?",
+    "body": "",
+    "subreddit": "r/AskReddit",
+    "flair": "",
+    "link_domain": "self.AskReddit",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnmzuh",
+    "title": "Sold massive parcel of land for huge profit what do I do?",
+    "body": "During Covid a couple of friends and I bought land in Texas. My portion of the land will sell for 880k (paid 150k, plus 30k in improvments, will pay about 125 in capital gains). My wife and I total household income is 200k, both of us have now started to max out 401k. We owe 353k at 4.99 on a home and about around 7k in zero percent debt. We have 5500 in a HSA, 30k in a joint account and are expecting in January. Pay the mortgage is the first step then what?",
+    "subreddit": "r/personalfinance",
+    "flair": "Budgeting",
+    "link_domain": "self.personalfinance",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnc8kj",
+    "title": "Do people actually invest the difference?",
+    "body": "I constantly see the advice that if you have a debt with a low APR (under 3-4%), you shouldn't pay a cent more than the minimum because investing the difference yields higher returns long-term. The math makes complete sense on paper, but how many people actually end up investing that extra cash in practice? If someone isn't going to follow through with investing the difference, aren't they better off just throwing it at the low APR loan anyway? Honestly, if I budgeted $500/m for a car payment and landed $350/m, I’d just absorb that extra $150 back into my daily budget.",
+    "subreddit": "r/personalfinance",
+    "flair": "Investing",
+    "link_domain": "self.personalfinance",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnpo6b",
+    "title": "Charging interest on friends?",
+    "body": "Hi all, wondering if this is rude to do. My friends have asked me to pay for them using my credit card and it had racked up to around $1200-$2000, and if they don’t pay that fully for a month, I’d add the interest if they don’t pay it fully back, especially since that’s adding interest on my card. I ofc learned my lesson to not let that happen and to pay it fully nonetheless since it goes on my record. I since have paid off every statement and have really great credit score, although this behaviour tainted me among my friends and how I am weird about money. Im beginning to think it was wrong to do that but then in my perspective , if I owe someone, I wouldn’t let it wait for even more than a day to pay them back. Any perspective on this?",
+    "subreddit": "r/personalfinance",
+    "flair": "Credit",
+    "link_domain": "self.personalfinance",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnlk7k",
+    "title": "Should I \"buy\" my car from my wife?",
+    "body": "Important info: I am divorced. With my ex, we share a kid. With my new wife, we do not share finances. She contributes in ways, but I pay the house and bills. \"Her\" car is \"my\" car and vice versa, but ultimately we have split finances for the most part and we keep it that way for various reasons that aren't related to the topic. I would kindly ask for you to not get engulfed on how we happily make things work and rather give advice at what's on the table here. I am welcome to interesting ideas/thought processes. My wife has a 2021 Camry xse. Fantastic condition. Family owned since nearly new. 80k on it. Red, black rims, leather heated seats. We need an suv so she is going car shopping for a crv and planning on using her Camry as a down payment. Kbb says her car is worth 18-22k and she would let it go at the dealership for 20k so she can put that down and finance the remainder 10-15k on the crv she is looking at. I have a 2010 Camry, 204k in it. I am almost considering selling my car, and giving her 20k and taking her Camry. I believe since we are spouses, we can avoid paying all of the taxes and such like that by changing titles. I just...don't know if it's a good idea still. Yes, my car is old, has high miles, but there isn't anything super wrong with it. I drive a company truck and hardly drive my personal car unless I'm picking my kids up from school or going somewhere with them (movies, mall, etc) I think I put about 6-9k on it a year. Judging by what I know of my car, I'",
+    "subreddit": "r/personalfinance",
+    "flair": "Planning",
+    "link_domain": "self.personalfinance",
+    "labels": null
+  },
+  {
+    "id": "t3_1wmup4b",
+    "title": "Should I contribute my whole salary to my 401k?",
+    "body": "My wife and I have a unique situation. We work together for a non-profit. Our salary is extremely low ($20k each), but the vast majority of our other expenses (home, food, vehicle, gas, insurance, kids current secondary and future college education) are provided, but not counted as taxable income. We are also completely free of debt. Our primary expense is actually personal travel when we are on vacation. We currently have the proceeds of the sale of our last home (about $300k) invested in index funds in a taxable account. Because of our low income, any realized capital gains are tax free. I have been adding $300/week into this account for the last year or so. Here's my question: what would happen if we invested almost all (we can actually invest 99%) of our salary into our company's Roth 401k? For living expenses, we would systematically sell the necessary amount (maybe $2000/month) out of the taxable account. This would allow the maximum amount to grow tax free for when we distribute at retirement. We would also sell a chunk each year to fully fund our Roth IRAs. I'm the older of the two of us, at 46. My goal is to be with this organization for the next 10 years or so. After that, we would need to find a new home and potentially new jobs. Is there anything I'm missing? What's the danger in this plan? EDIT: For those wondering, we are house parents at a home for abused, abandoned, neglected, and orphaned girls. Our expenses are provided as part of the care of our home (food ",
+    "subreddit": "r/personalfinance",
+    "flair": "Investing",
+    "link_domain": "self.personalfinance",
+    "labels": null
+  },
+  {
+    "id": "t3_1wmt3tn",
+    "title": "Auto loan, why does the dealership want to run my credit?.",
+    "body": "I am financing through navy fed. I have a check ready. Yet Toyota Dealership sales guy is asking me to fill out a financing application to \"verify my identity \" He texted me \"We do not submit it to any lenders because you are pre approved with Navy fed. It is a simple inquiry to make sure you are not on a \"do not sell\" list due to all of the fraud that is out there. The only way to not have credit ran is with straight cash or a cashiers check which is basically cash\" am I dumb if I walk away? UPDATE ******* THANK YOU EVERYONE. I stood my ground. He ended up saying it was the dealerships policy and he was very passive aggressive threated not to sell me the car. I was ready to walk and he said, \" well let me talk to my management.\" Turns out it wasn’t needed, finance guy cleared everything with Navy Fed and I purchased the vehicle! He had openly told me they would NOT beat my 4% with Navy fed. So no, it was not necessary.",
+    "subreddit": "r/personalfinance",
+    "flair": "Auto",
+    "link_domain": "self.personalfinance",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnohe5",
+    "title": "I'm 40yrs old and don't have an Roth and only about 45k in 401k.",
+    "body": "What's my immediate next move? 7% of my check goes directly into 401k. We use Paycom, Fidelity and Empower through my work but I have no idea where to start and how to set it up? Any advice would be great.",
+    "subreddit": "r/personalfinance",
+    "flair": "Retirement",
+    "link_domain": "self.personalfinance",
+    "labels": null
+  },
+  {
+    "id": "t3_1wno4o8",
+    "title": "25 y/o, struggling in this worsening economy and need budgeting advice",
+    "body": "So as I’m sure plenty of you’re aware, the US economy isn’t in the greatest place for gen Z, but is especially egregious in my location. While it’s no poverty center, it is basically a retirement home everywhere 30 miles in any direction, meaning everything in this location is more expensive, including rent and food, while all the jobs in this location are either low paying service based or medical. I’m currently working a decent paying job, could be worse pay but by no means doing well—but it’s massively stress inducing to where even my doctors recommend a change in work. I currently work 7 days a week between my job, and an apprenticeship which can hopefully make for a better career within a year, which means I’m unfortunately locked down in this location and moving isn’t really an option for a while. With what I’m making now, roughly 23/hr, it’s paying well enough for savings, but I will have to find a place to rent within 2 months, which is not cheap in the slightest, averaging around ~800 a month as there’s no cheap apartments and mainly just FB marketplace adverts. I already pay heavy auto insurance just because this state is full of terrible drivers and my insurance went up 50% just moving here, plus heavy student loan I’m trying to refinance—but am hitting a wall with the agency with getting it handled. Between food, bills, supplies I need at my job given it’s a physical outdoor job, I’m spending roughly 2400 per month, and only pulling in 2600. My spending might be g",
+    "subreddit": "r/personalfinance",
+    "flair": "Budgeting",
+    "link_domain": "self.personalfinance",
+    "labels": null
+  },
+  {
+    "id": "t3_1wng3wj",
+    "title": "529 Company refusing to update deposit records?",
+    "body": "Last year my MIL gave $8,000 towards by son’s 529 savings plan through Bright Start. BS incorrectly documented the deposit as being made by me. (I am the account owner.) I didn’t notice the error until after my MIL was flagged by the state of Illinois after claiming the tax deduction. They are saying she has to repay the deduction amount, since there is no record of the deposit. I called Bright Start, and after several inquiries they finally said they corrected the record. Here’s the problem: they refuse to give me any documentation at all (either a statement or an email, etc) of the correction. They insist all my MIL needs to do is provide a canceled check to the IL Dept of Revenue. But that’s not what the DOR says - they are asking her to provide some type of statement. It’s really infuriating. I’m sure I could get it resolved with an attorney one way or another, but we’re only talking about $200-300 dollars. Has anyone ever heard of this? Is there anything else I can try? I think I’m out of luck - I just want to vent more than anything. I’m completely dumbfounded how poorly BS is treating me for such a simple request.",
+    "subreddit": "r/personalfinance",
+    "flair": "Saving",
+    "link_domain": "self.personalfinance",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn0jmn",
+    "title": "Is delaying HSA reimbursement actually a good idea in practice?",
+    "body": "I know in theory the idea is: you have a medical expense. Instead of paying from HSA now, you pay out of pocket and save the receipt to reimburse from your HSA later, allowing the HSA funds to grow tax free. But does this actually work in practice ? What if you try to reimburse the expense decades later, but the IRS audits you, and the doctor whose charge you're reimbursing has already stopped practicing and there's no paper trail?",
+    "subreddit": "r/personalfinance",
+    "flair": "Other",
+    "link_domain": "self.personalfinance",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnn6ui",
+    "title": "My local llm when I tell it to do any changes to my vLLM service",
+    "body": "",
+    "subreddit": "r/LocalLLaMA",
+    "flair": "Funny",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnipcz",
+    "title": "New 6B image model coming, AntLing just open sourced the Ming-Image-0.1-Design family",
+    "body": "",
+    "subreddit": "r/LocalLLaMA",
+    "flair": "New Model",
+    "link_domain": "i.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wmxfjs",
+    "title": "Qwen 4 Announced at Apsara Conference",
+    "body": "I wanted to share a quick update: Alibaba has officially announced Qwen 4 at the Apsara Conference,",
+    "subreddit": "r/LocalLLaMA",
+    "flair": "News",
+    "link_domain": "self.LocalLLaMA",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnhq8d",
+    "title": "Qwen image 2.1 (Fast FP8) generates premium quality images",
+    "body": "",
+    "subreddit": "r/LocalLLaMA",
+    "flair": "Discussion",
+    "link_domain": "reddit.com",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnf4q2",
+    "title": "Laya model playing Flappy Bird on a CPU using OpenVINO INT8 inference",
+    "body": "",
+    "subreddit": "r/LocalLLaMA",
+    "flair": "News",
+    "link_domain": "v.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnh7tk",
+    "title": "AntLing open sourced the Ming-Image-0.1-Design family",
+    "body": "",
+    "subreddit": "r/LocalLLaMA",
+    "flair": "New Model",
+    "link_domain": "huggingface.co",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnhlbl",
+    "title": "Now Opus 5.5 is 58 on Artificial Analysis , how long  do you have wait until  an open model hits 58?",
+    "body": "It is 12 points higher than the best open model mimo 2.6 pro and a big jump from fable 5.1. Crazy, glm 5.5 and qwen 4 will be on par with gpt 6 sol or better since it has a score of 48 If it took 2 months for the best open model to go from 44 to 46, then at this rate, in 6 months , they will reach 58? It is quite possible they will reach it in 4-5 months, since they have will more leaps in intelligence as they deploy more gpus and scale up the parameters, data and compute and improve the architecture .Wow sol 6 is worse than 5,6 at deepswe?",
+    "subreddit": "r/LocalLLaMA",
+    "flair": "Discussion",
+    "link_domain": "self.LocalLLaMA",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnechu",
+    "title": "Qwen 3.8 27B at ~3 BPW on an RTX 3060: GSQ vs ByteShape IQ3-XXS 2.88BPW",
+    "body": "",
+    "subreddit": "r/LocalLLaMA",
+    "flair": "Discussion",
+    "link_domain": "v.redd.it",
+    "labels": null
+  },
+  {
+    "id": "t3_1wn2ybk",
+    "title": "Ngram and world knowledge - why are we just building a coding model?",
+    "body": "This post is written by a human and I'd appreciate it if you treated it as such. Thanks. So, I've been noticing a pretty clear interest in developing as good a coding and agentic tool-calling model as possible, especially at smaller sizes, sub-50 gigs. However, I'm finding that at least for my use of AI, if I really want to move away from big providers, I am going to require a model that has better world knowledge than the current offerings. Qwen 3.8 27B is a truly fantastic model for tons and tons of stuff. It's highly intelligent, super good at designing applications and coding and working on my system. However, its world knowledge sucks​ compared to the frontier, especially at the Q4 quant that I have to run it at. So, that leaves me with a question. With the new N-gram technology that we're seeing being baked into Qwen 3.8 Next and that presumably will run on future models, why can't a model be made that has a smaller set of intellectual capabilities but a greater amount of world knowledge? I understand that right now everyone is optimizing towards making as smart a model as possible fit into as small a space as possible. But why don't we leverage the SSD to give the model a lot of world knowledge and make models that are better at dealing with screenshots, multilingual capabilities, doing things like pixel art or answering physics questions? ngram seems like the answer to the \"can't fit in vram\" question... Qwen 3.8 Next really opens my mind to the possibility that there",
+    "subreddit": "r/LocalLLaMA",
+    "flair": "Discussion",
+    "link_domain": "self.LocalLLaMA",
+    "labels": null
+  },
+  {
+    "id": "t3_1wnggz5",
+    "title": "mini-AGI: Continual-learning dynamically looped transformer with evolutionary grown (on a laptop)",
+    "body": "",
+    "subreddit": "r/LocalLLaMA",
+    "flair": "Discussion",
+    "link_domain": "github.com",
+    "labels": null
+  }
+]

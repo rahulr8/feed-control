@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Feed Control</title>
+  <link rel="stylesheet" href="options.css">
+  <script type="module" src="options.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Feed Control <small>for Reddit &amp; X</small></h1>
+    <p id="warn" role="status" hidden></p>
+
+    <section>
+      <h2>Hide from my feed</h2>
+      <ul id="filters"></ul>
+      <form id="add">
+        <input name="topic" placeholder="Add a topic, e.g. Sports" autocomplete="off" maxlength="60" required>
+        <button>Add</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Strictness</h2>
+      <div id="strictness" class="seg" role="radiogroup" aria-label="Strictness">
+        <label><input type="radio" name="strictness" value="relaxed">Relaxed</label>
+        <label><input type="radio" name="strictness" value="balanced">Balanced</label>
+        <label><input type="radio" name="strictness" value="strict">Strict</label>
+      </div>
+    </section>
+
+    <details id="api">
+      <summary>API <span id="current"></span></summary>
+      <form id="apiForm">
+        <div class="seg" role="radiogroup" aria-label="Provider">
+          <label><input type="radio" name="provider" value="openrouter">OpenRouter</label>
+          <label><input type="radio" name="provider" value="typesafe">TypeSafe</label>
+          <label><input type="radio" name="provider" value="custom">Custom</label>
+        </div>
+        <label id="baseRow">Base URL <input name="base" type="url" pattern="https://.*" title="Must start with https://" placeholder="https://proxy.example.com" spellcheck="false" required></label>
+        <label><span class="keyhead"><span id="keyLabel">API key</span><a id="keyLink" target="_blank" rel="noopener">Get a key ↗</a></span>
+          <input name="key" type="password" autocomplete="off" spellcheck="false"></label>
+        <div class="row"><button>Save</button><output id="saved" aria-live="polite"></output></div>
+      </form>
+    </details>
+  </main>
+
+  <template id="row">
+    <li><label><input type="checkbox"><span></span></label><button type="button" class="rm" aria-label="Remove">×</button></li>
+  </template>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Feed Control dev feed</title>
+  <link rel="stylesheet" href="../content.css">
+  <style>
+    body { margin: 0; background: #0b1416; color: #d7dadc; font: 14px/1.5 system-ui, sans-serif; }
+    main { max-width: 640px; margin: 0 auto; padding: 16px; }
+    shreddit-post, shreddit-ad-post { display: block; padding: 12px 16px; border-radius: 16px; }
+    shreddit-post:hover { background: #1a282d; }
+    small { color: #8ba2ad; }
+    h3 { margin: 4px 0; font-size: 18px; color: #f2f4f5; }
+    hr { border: 0; border-bottom: 1px solid #2a3c42; margin: 0; }
+  </style>
+</head>
+<body>
+  <main id="feed"></main>
+  <script type="module">
+    import './stub.js'
+    const posts = [
+      ['t3_ok', 'r/vancouver', 'Found a wallet on the 99 B-Line this morning, turned it in at Commercial-Broadway', 'Blue leather, had a library card for someone named Priya. Handed it to the SkyTrain attendant around 8:40.'],
+      ['t3_slop', 'r/productivity', '🚀 5 Life-Changing Habits That Transformed My Mornings', '**1. Wake up early** — It\'s not just about time, it\'s about mindset. **2. Hydrate** 💧 ... In conclusion, small changes lead to big results. What habits have transformed YOUR life? 👇'],
+      ['t3_sports', 'r/nba', 'Game thread: Lakers vs Celtics', 'Tip-off at 7:30 ET.'],
+      ['t3_stealth', 'r/SaaS', 'Anyone else struggling with invoicing? Finally found something that works', 'Been using InvoiceFlow for a month and honestly it saved me hours. Not affiliated lol.'],
+      ['t3_ad', 'u/chevroletcanada', 'You wanted a comeback? Here it is. The 2027 Bolt', '', true],
+      ['t3_ok2', 'r/AskHistorians', 'Why did medieval castles have spiral staircases that turn clockwise?', ''],
+    ]
+    feed.innerHTML = posts.map(([id, sub, title, body, ad]) => {
+      const tag = ad ? 'shreddit-ad-post' : 'shreddit-post'
+      return `<article><${tag} id="${id}" post-title="${title}" subreddit-prefixed-name="${sub}">
+        <small>${sub}${ad ? ' · Promoted' : ''}</small><h3>${title}</h3>
+        ${body ? `<div slot="text-body">${body}</div>` : ''}</${tag}></article><hr>`
+    }).join('')
+    document.body.append(Object.assign(document.createElement('script'), { src: '../content.js' }))
+  </script>
+</body>
+</html>

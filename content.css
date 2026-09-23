@@ -1,0 +1,52 @@
+[data-feed-control] { position: relative; }
+
+/* Hide instantly; animate only the reveal. */
+[data-feed-control="shown"] > * {
+  interpolate-size: allow-keywords;
+  transition: height .35s ease, filter .3s ease, opacity .3s ease;
+}
+
+[data-feed-control="hide"] > :not(.feed-control-pill) {
+  height: 60px;
+  overflow: clip;
+  filter: blur(10px) grayscale(1);
+  opacity: .4;
+  mask-image: linear-gradient(#000 30%, transparent);
+}
+
+[data-feed-control="dim"] > :not(.feed-control-pill) { transition: filter .2s, opacity .2s; filter: grayscale(.9); opacity: .45; }
+[data-feed-control="dim"]:hover > :not(.feed-control-pill) { filter: none; opacity: 1; }
+
+.feed-control-pill {
+  all: unset;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+/* Bottom-right: clear of Reddit's Join and ⋯ buttons. */
+[data-feed-control="dim"] > .feed-control-pill { inset: auto 12px 10px auto; }
+
+.feed-control-pill > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font: 500 12px/1.2 system-ui, sans-serif;
+  color: #f4f4f5;
+  background: rgb(24 24 27 / .82);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgb(0 0 0 / .18), inset 0 0 0 1px rgb(255 255 255 / .08);
+  transition: transform .15s ease;
+}
+.feed-control-pill svg { opacity: .6; flex: none; }
+.feed-control-pill i { font-style: normal; font-weight: 600; color: #a5b4fc; padding-left: 8px; border-left: 1px solid rgb(255 255 255 / .15); }
+.feed-control-pill:hover > span { transform: scale(1.04); }
+.feed-control-pill:focus-visible > span { outline: 2px solid #818cf8; outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-feed-control] > *, .feed-control-pill > span { transition: none !important; }
+}
