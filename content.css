@@ -29,12 +29,6 @@ article[data-feed-control="remove"] + hr { display: none; } /* Reddit's divider 
   cursor: pointer;
 }
 .feed-control-pill > span {
-  display: flex; width: 100%; box-sizing: border-box; padding: 6px 10px; border-radius: 6px;
-  color: inherit; background: rgb(127 127 127 / .12); box-shadow: none; backdrop-filter: none;
-  font-weight: 500; opacity: .85;
-}
-
-.feed-control-pill > span {
   display: inline-flex;
   align-items: center;
   gap: 8px;

@@ -3,8 +3,15 @@
 Hide AI slop, ads & any topic on Reddit, X and LinkedIn. A Chrome extension that blurs promoted posts, AI slop, stealth ads, and any topics you choose from your Reddit and X (Twitter) feeds. Classification uses [TypeSafe's Jev](https://docs.typesafe.ai) model.
 
 ## Install
-1. `chrome://extensions` → enable Developer mode → **Load unpacked** → this folder.
-2. Click the extension icon → **API** → pick a provider (OpenRouter, TypeSafe, or a custom TypeSafe-compatible URL) → paste its key → **Save**.
+**From the Chrome Web Store:** _(link once published)_
+
+**Manually (works today, any Chromium browser: Chrome, Arc, Brave, Edge):**
+1. Download `feed-control.zip` from the latest release (or clone this repo) and unzip it.
+2. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked**, pick the unzipped folder.
+3. Get an API key at https://openrouter.ai/settings/keys (about 3 cents per thousand posts).
+4. Click the Feed Control icon → **API** → paste the key → **Save**. Then browse Reddit, X or LinkedIn.
+
+Privacy: see [PRIVACY.md](PRIVACY.md).
 
 ## Architecture
 | File | Role |

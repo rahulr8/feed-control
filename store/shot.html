@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Feed Control store screenshot</title>
+  <!-- Render: ?feed=linkedin|feed|x  → a 1280×800 store screenshot of the real extension on a mock feed + its popup. -->
+  <style>
+    html, body { margin: 0; width: 1280px; height: 800px; overflow: hidden; font-family: system-ui, -apple-system, sans-serif; }
+    body { display: grid; grid-template-columns: 1fr 416px; background: linear-gradient(135deg, #1b1b3a, #2c2c6c); }
+    .feed { position: relative; margin: 28px 0 0 28px; border-radius: 12px 12px 0 0; overflow: hidden; box-shadow: 0 20px 60px rgb(0 0 0 / .45); }
+    .feed iframe { width: 100%; height: 100%; border: 0; }
+    aside { padding: 28px 28px 0 28px; display: grid; grid-template-rows: auto 1fr; gap: 16px; }
+    h1 { margin: 0; color: #fff; font-size: 26px; line-height: 1.2; letter-spacing: -.02em; }
+    h1 span { color: #a5a6ff; }
+    .popup { border-radius: 12px 12px 0 0; overflow: hidden; box-shadow: 0 20px 60px rgb(0 0 0 / .45); }
+    .popup iframe { width: 360px; height: 100%; border: 0; display: block; margin: 0 auto; background: #111114; }
+  </style>
+</head>
+<body>
+  <div class="feed"><iframe id="feed"></iframe></div>
+  <aside>
+    <h1 id="title"></h1>
+    <div class="popup"><iframe src="../dev/popup.html?configured"></iframe></div>
+  </aside>
+  <script>
+    const which = new URLSearchParams(location.search).get('feed') ?? 'linkedin'
+    document.getElementById('feed').src = `../dev/${which === 'linkedin' ? 'linkedin' : which === 'x' ? 'x' : 'feed'}.html`
+    document.getElementById('title').innerHTML = {
+      linkedin: 'Hide <span>suggested posts, ads & AI slop</span> on LinkedIn',
+      feed: 'Hide <span>any topic</span> you choose on Reddit',
+      x: 'Hide <span>AI reply-guy slop</span> on X',
+    }[which]
+  </script>
+</body>
+</html>
