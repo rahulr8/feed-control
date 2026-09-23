@@ -13,6 +13,7 @@ export const DEFAULTS = {
   provider: 'openrouter',
   baseUrl: '',
   strictness: 'balanced',
+  matched: 'blur', // confident matches: 'blur' (collapsed, one click to show) or 'remove' (gone)
   filters: [
     { id: 'promoted', label: 'Promoted', on: true },
     { id: 'slop', label: 'AI slop', on: true },
@@ -129,17 +130,19 @@ export const fingerprint = obj => {
 // The whole decision for one post, shared by the extension, eval/run.js and the dev stub.
 // Callers own caching and transport: pass cached `answers` and an `ask(post, questions)` (omit to never ask).
 // Returns the verdict plus the merged answers; `asked` says whether new answers need caching.
-export async function classify({ site, promoted, post }, { filters, strictness }, { answers = {}, ask } = {}) {
+export async function classify({ site, promoted, post }, { filters, strictness, matched }, { answers = {}, ask } = {}) {
+  // 'remove' only upgrades confident hides; borderline (dim) posts are never silently erased.
+  const style = v => v?.tier === 'hide' && matched === 'remove' ? { ...v, tier: 'remove' } : v
   const active = filters.filter(f => f.on && applies(f, post, site))
   if (promoted) {
     const f = active.find(f => f.id === 'promoted')
-    return { verdict: f ? { label: describe(f, 'hide'), tier: 'hide' } : null, answers, asked: false }
+    return { verdict: style(f ? { label: describe(f, 'hide'), tier: 'hide' } : null), answers, asked: false }
   }
   // Only questions not answered yet, e.g. a newly added topic.
   const missing = Object.entries(questionsFor(active)).filter(([q]) => !(q in answers))
   const asked = missing.length > 0 && !!ask
   if (asked) answers = { ...answers, ...await ask(post, Object.fromEntries(missing)) }
-  return { verdict: verdict(answers, active, strictness), answers, asked } // unanswered filters score null
+  return { verdict: style(verdict(answers, active, strictness)), answers, asked } // unanswered filters score null
 }
 
 const ERRORS = { 401: 'Invalid API key', 402: 'Out of credits', 403: 'API key not allowed', 429: 'Rate limited, slow down' }

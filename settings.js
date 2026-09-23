@@ -5,6 +5,7 @@ import { DEFAULTS, PROVIDERS, STRICTNESS, baseUrlOf } from './lib.js'
 export async function loadSettings() {
   const s = { ...DEFAULTS, ...(await chrome.storage.sync.get(null)) }
   if (!(s.strictness in STRICTNESS)) s.strictness = DEFAULTS.strictness
+  if (!['blur', 'remove'].includes(s.matched)) s.matched = DEFAULTS.matched
   if (!(s.provider in PROVIDERS)) s.provider = DEFAULTS.provider
   const { keys = {} } = await chrome.storage.local.get('keys')
   return { ...s, keys, apiKey: keys[s.provider], endpoint: baseUrlOf(s) }

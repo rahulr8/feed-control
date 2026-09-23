@@ -1,5 +1,10 @@
 [data-feed-control] { position: relative; }
 
+/* Remove mode: content gone entirely (the host stays so X's virtual list can re-measure it to 0). */
+[data-feed-control="remove"] { border: 0 !important; padding: 0 !important; }
+[data-feed-control="remove"] > * { display: none !important; }
+article[data-feed-control="remove"] + hr { display: none; } /* Reddit's divider after the post */
+
 /* Hide instantly; animate only the reveal. */
 [data-feed-control="shown"] > * {
   interpolate-size: allow-keywords;

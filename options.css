@@ -67,3 +67,4 @@ details label { display: grid; gap: 4px; margin-top: 10px; font-size: 13px; colo
 .keyhead a:hover { text-decoration: underline; }
 #apiForm .seg label { display: block; margin: 0; }
 .note { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+section .note { margin-top: 6px; }

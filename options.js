@@ -24,6 +24,10 @@ function render() {
     return li
   }))
   $(`[name=strictness][value=${s.strictness}]`).checked = true
+  $(`[name=matched][value=${s.matched}]`).checked = true
+  $('#matchedNote').textContent = s.matched === 'remove'
+    ? 'Confident matches disappear. Borderline ones are still dimmed and labeled.'
+    : 'Confident matches collapse behind a label; click Show to see them.'
 }
 
 function showStatus(error) {
@@ -41,6 +45,7 @@ $('#add').onsubmit = e => {
 }
 
 $('#strictness').onchange = e => save({ strictness: e.target.value })
+$('#matched').onchange = e => save({ matched: e.target.value })
 
 const a = w => (/^[aeiou]/i.test(w) ? 'an ' : 'a ') + w
 

@@ -66,4 +66,12 @@ assert.deepEqual(calls[0], ['topic-cats.match'], 'new topic asks only its own qu
 r = await classify({ site: 'reddit', post }, withTopic, {})
 assert.equal(r.verdict, null); assert.equal(r.asked, false, 'no key: nothing asked, nothing hidden')
 
+// matched: 'remove' upgrades confident hides only; dims stay visible.
+const sportsAsk = v => async (_, q) => Object.fromEntries(Object.keys(q).map(k => [k, k === 'topic-sports.match' ? v : 0.1]))
+const removeMode = { filters, strictness: 'balanced', matched: 'remove' }
+assert.equal((await classify({ site: 'reddit', post }, removeMode, { ask: sportsAsk(0.9) })).verdict.tier, 'remove')
+assert.equal((await classify({ site: 'reddit', post }, removeMode, { ask: sportsAsk(0.6) })).verdict.tier, 'dim', 'borderline never removed')
+assert.equal((await classify({ site: 'reddit', promoted: true, post }, removeMode)).verdict.tier, 'remove')
+assert.equal((await classify({ site: 'reddit', post }, settings, { ask: sportsAsk(0.9) })).verdict.tier, 'hide', 'blur is the default')
+
 console.log('ok')

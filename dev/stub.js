@@ -31,7 +31,7 @@ window.chrome = {
     // Same pipeline as background.js; only the transport is canned.
     sendMessage: async msg => {
       const ask = async (post, qs) => Object.fromEntries(Object.keys(qs).map(q => [q, CANNED[msg.id]?.[q] ?? 0.1]))
-      return (await classify(msg, { filters: store.sync.filters, strictness: 'balanced' }, { ask })).verdict
+      return (await classify(msg, { filters: store.sync.filters, strictness: 'balanced', matched: store.sync.matched ?? 'blur' }, { ask })).verdict
     },
   },
 }

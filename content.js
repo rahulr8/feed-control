@@ -82,6 +82,7 @@
     const host = site.host(el)
     unmark(el)
     host.dataset.feedControl = tier
+    if (tier === 'remove') return
 
     const pill = document.createElement('button')
     pill.type = 'button'
@@ -141,6 +142,11 @@
     if (area === 'session') return
     generation++
     verdicts.clear()
-    document.querySelectorAll(site.sel).forEach(el => eligible(el) && !revealed.has(site.id(el)) && io.observe(el))
+    document.querySelectorAll(site.sel).forEach(el => {
+      if (!eligible(el) || revealed.has(site.id(el))) return
+      // Removed posts have no box, so IntersectionObserver never reports them: re-check directly (cached, no API call).
+      if (site.host(el).dataset.feedControl === 'remove') classify(el)
+      else io.observe(el)
+    })
   })
 })()
