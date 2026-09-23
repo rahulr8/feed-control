@@ -22,15 +22,14 @@ function row(f) {
   return li
 }
 
-// Topic: a chip; click toggles it on/off, × removes it.
-function chip(f) {
-  const li = clone('#chip')
-  const [btn, rm] = li.querySelectorAll('button')
-  li.classList.toggle('off', !f.on)
-  btn.textContent = f.label
-  btn.title = f.on ? 'Click to pause this topic' : 'Paused: click to resume'
-  btn.setAttribute('aria-pressed', f.on)
-  btn.onclick = () => toggle(f, !f.on)
+// Topic: same switch row, plus × to remove it.
+function topicRow(f) {
+  const li = clone('#topicRow')
+  const box = li.querySelector('input')
+  box.checked = f.on
+  box.onchange = () => toggle(f, box.checked)
+  li.querySelector('span').textContent = f.label
+  const rm = li.querySelector('.rm')
   rm.setAttribute('aria-label', `Remove ${f.label}`)
   rm.onclick = () => setFilters(fs => fs.filter(x => x.id !== f.id))
   return li
@@ -38,7 +37,9 @@ function chip(f) {
 
 function render() {
   $('#filters').replaceChildren(...s.filters.filter(f => !f.site && !isTopic(f)).map(row))
-  $('#topics').replaceChildren(...s.filters.filter(isTopic).map(chip))
+  const topics = s.filters.filter(isTopic)
+  $('#topics').replaceChildren(...topics.map(topicRow))
+  $('#topicsEmpty').hidden = topics.length > 0
   $('#linkedin').replaceChildren(...s.filters.filter(f => f.site === 'linkedin').map(row))
   $(`[name=strictness][value=${s.strictness}]`).checked = true
   $(`[name=matched][value=${s.matched}]`).checked = true

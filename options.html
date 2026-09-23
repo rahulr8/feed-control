@@ -25,9 +25,10 @@
 
     <section aria-labelledby="h-topics">
       <h2 id="h-topics">Topics</h2>
-      <div class="card pad">
-        <ul class="chips" id="topics"></ul>
-        <form id="add">
+      <div class="card">
+        <ul class="rows" id="topics"></ul>
+        <p class="hint empty" id="topicsEmpty">Hide posts about anything: a person, a sport, a trend.</p>
+        <form id="add" class="pad">
           <input name="topic" placeholder="Add a topic, e.g. Sports" aria-label="New topic" autocomplete="off" maxlength="60" required>
           <button class="primary">Add</button>
         </form>
@@ -67,8 +68,8 @@
   <template id="row">
     <li><label><span></span><input type="checkbox" role="switch"></label></li>
   </template>
-  <template id="chip">
-    <li class="chip"><button type="button" class="toggle"></button><button type="button" class="rm">×</button></li>
+  <template id="topicRow">
+    <li><label><span></span><input type="checkbox" role="switch"></label><button type="button" class="rm">×</button></li>
   </template>
 </body>
 </html>
