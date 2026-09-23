@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><title>Feed Control dev popup</title><link rel="stylesheet" href="../options.css"></head>
+<head><meta charset="utf-8"><base href="../"><title>Feed Control dev popup</title><link rel="stylesheet" href="options.css"></head>
 <body>
+  <!-- <base> points at the repo root so options.html's relative paths (icons/…) resolve as in the extension. -->
   <script type="module">
-    import './stub.js'
-    const html = await (await fetch('../options.html')).text()
+    await import(new URL('dev/stub.js', document.baseURI))
+    const html = await (await fetch('options.html', { cache: 'no-store' })).text()
     document.body.innerHTML = new DOMParser().parseFromString(html, 'text/html').body.innerHTML
-    await import('../options.js')
+    await import(new URL('options.js', document.baseURI))
   </script>
 </body>
 </html>

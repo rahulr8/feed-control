@@ -20,7 +20,7 @@ export const DEFAULTS = {
     { id: 'slop', label: 'AI slop', on: true },
     { id: 'stealth', label: 'Ads & self-promo', on: true },
     { id: 'suggested', label: 'Suggested posts', on: true, site: 'linkedin' },
-    { id: 'activity', label: 'Posts your network liked or commented on', on: false, site: 'linkedin' },
+    { id: 'activity', label: 'Network likes & comments', on: false, site: 'linkedin' },
     { id: 'recommendations', label: 'Jobs & people recommendations', on: true, site: 'linkedin' },
     { id: 'sidebar', label: 'Sidebar news & Premium upsells', on: true, site: 'linkedin', page: true },
   ],

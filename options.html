@@ -8,61 +8,83 @@
 </head>
 <body>
   <main>
-    <h1>Feed Control <small>for Reddit, X &amp; LinkedIn</small></h1>
+    <header>
+      <img src="icons/48.png" alt="" width="28" height="28">
+      <div>
+        <h1>Feed Control</h1>
+        <p>Reddit · X · LinkedIn</p>
+      </div>
+    </header>
+
     <p id="warn" role="status" hidden></p>
 
-    <section>
-      <h2>Hide from my feed</h2>
-      <ul id="filters"></ul>
-      <form id="add">
-        <input name="topic" placeholder="Add a topic, e.g. Sports" autocomplete="off" maxlength="60" required>
-        <button>Add</button>
-      </form>
+    <section aria-labelledby="h-filters">
+      <h2 id="h-filters">Hide from my feed</h2>
+      <ul class="card" id="filters"></ul>
     </section>
 
-    <section>
-      <h2>On LinkedIn, also hide</h2>
-      <ul id="linkedin"></ul>
-    </section>
-
-    <section>
-      <h2>Strictness</h2>
-      <div id="strictness" class="seg" role="radiogroup" aria-label="Strictness">
-        <label><input type="radio" name="strictness" value="relaxed">Relaxed</label>
-        <label><input type="radio" name="strictness" value="balanced">Balanced</label>
-        <label><input type="radio" name="strictness" value="strict">Strict</label>
+    <section aria-labelledby="h-topics">
+      <h2 id="h-topics">Topics</h2>
+      <div class="card pad">
+        <ul class="chips" id="topics"></ul>
+        <form id="add">
+          <input name="topic" placeholder="Add a topic, e.g. Sports" aria-label="New topic" autocomplete="off" maxlength="60" required>
+          <button class="primary">Add</button>
+        </form>
       </div>
     </section>
 
-    <section>
-      <h2>Matched posts</h2>
-      <div id="matched" class="seg" role="radiogroup" aria-label="Matched posts">
-        <label><input type="radio" name="matched" value="blur">Blur</label>
-        <label><input type="radio" name="matched" value="remove">Remove</label>
-      </div>
-      <p class="note" id="matchedNote"></p>
+    <section aria-labelledby="h-linkedin">
+      <h2 id="h-linkedin">On LinkedIn, also hide</h2>
+      <ul class="card" id="linkedin"></ul>
     </section>
 
-    <details id="api">
-      <summary>API <span id="current"></span></summary>
-      <form id="apiForm">
+    <section aria-labelledby="h-behavior">
+      <h2 id="h-behavior">Behavior</h2>
+      <div class="card pad stack">
+        <div class="field">
+          <span class="label" id="l-strict">Strictness</span>
+          <div id="strictness" class="seg" role="radiogroup" aria-labelledby="l-strict">
+            <label><input type="radio" name="strictness" value="relaxed">Relaxed</label>
+            <label><input type="radio" name="strictness" value="balanced">Balanced</label>
+            <label><input type="radio" name="strictness" value="strict">Strict</label>
+          </div>
+        </div>
+        <div class="field">
+          <span class="label" id="l-matched">Matched posts</span>
+          <div id="matched" class="seg" role="radiogroup" aria-labelledby="l-matched">
+            <label><input type="radio" name="matched" value="blur">Blur</label>
+            <label><input type="radio" name="matched" value="remove">Remove</label>
+          </div>
+          <p class="hint" id="matchedNote"></p>
+        </div>
+      </div>
+    </section>
+
+    <details id="api" class="card">
+      <summary><span>API</span><span id="current"></span></summary>
+      <form id="apiForm" class="pad stack">
         <div class="seg" role="radiogroup" aria-label="Provider">
           <label><input type="radio" name="provider" value="openrouter">OpenRouter</label>
           <label><input type="radio" name="provider" value="typesafe">TypeSafe</label>
           <label><input type="radio" name="provider" value="custom">Custom</label>
         </div>
-        <label id="baseRow">Base URL <input name="base" type="url" pattern="https://.*" title="Must start with https://" placeholder="https://proxy.example.com" spellcheck="false" required></label>
-        <label><span class="keyhead"><span id="keyLabel">API key</span><a id="keyLink" target="_blank" rel="noopener">Get a key ↗</a></span>
+        <label class="field" id="baseRow"><span class="label">Base URL</span>
+          <input name="base" type="url" pattern="https://.*" title="Must start with https://" placeholder="https://proxy.example.com" spellcheck="false" required></label>
+        <label class="field"><span class="label split"><span id="keyLabel">API key</span><a id="keyLink" target="_blank" rel="noopener">Get a key ↗</a></span>
           <input name="key" type="password" autocomplete="off" spellcheck="false"></label>
-        <div class="row"><button>Save</button><output id="saved" aria-live="polite"></output></div>
+        <div class="actions"><button class="primary">Save</button><output id="saved" aria-live="polite"></output></div>
       </form>
     </details>
 
-    <p class="note">To classify posts, Feed Control sends the text of posts you scroll past (title, body, author, quoted text, link previews) to your chosen provider. Your API key stays on this device.</p>
+    <p class="hint footer">To classify posts, Feed Control sends the text of posts you scroll past (title, body, author, quoted text, link previews) to your chosen provider. Your API key stays on this device.</p>
   </main>
 
   <template id="row">
-    <li><label><input type="checkbox"><span></span></label><button type="button" class="rm" aria-label="Remove">×</button></li>
+    <li><label><span></span><input type="checkbox" role="switch"></label></li>
+  </template>
+  <template id="chip">
+    <li class="chip"><button type="button" class="toggle"></button><button type="button" class="rm">×</button></li>
   </template>
 </body>
 </html>

@@ -138,16 +138,29 @@
     if (tier === 'hide') chip.innerHTML = EYE_OFF
     chip.append(label)
     if (tier === 'hide') chip.appendChild(document.createElement('i')).textContent = 'Show'
+    // Sites act on pointerdown/mousedown too (LinkedIn ad tracking, X navigation): keep all of them to ourselves.
+    for (const type of ['pointerdown', 'mousedown', 'pointerup', 'mouseup']) pill.addEventListener(type, e => e.stopPropagation())
     pill.onclick = e => {
       e.preventDefault()
-      e.stopPropagation() // both sites open the post on any click inside it
-      revealed.add(site.id(el))
-      host.dataset.feedControl = 'shown'
-      setInert(host, false)
-      pill.remove()
+      e.stopPropagation()
+      reveal(site.id(el))
     }
     host.prepend(pill)
     setInert(host, tier === 'hide')
+  }
+
+  // Reveal every rendering of the post: LinkedIn keeps up to 3 copies and swaps them on interaction,
+  // so revealing only the clicked one made the post "disappear" behind a still-hidden copy.
+  function reveal(id) {
+    revealed.add(id)
+    for (const e of document.querySelectorAll(site.sel)) {
+      if (site.id(e) !== id) continue
+      const host = site.host(e)
+      if (!host.dataset.feedControl) continue
+      host.dataset.feedControl = 'shown'
+      host.querySelector(':scope > .feed-control-pill')?.remove()
+      setInert(host, false)
+    }
   }
 
   function unmark(el) {
@@ -165,7 +178,8 @@
     for (const e of entries) if (e.isIntersecting) { io.unobserve(e.target); classify(e.target) }
   }, { rootMargin: '600px 0px' })
 
-  const eligible = el => site.id(el) && site.eligible(el)
+  // A post nested inside another matched post is handled by its outer one (never marked twice).
+  const eligible = el => site.id(el) && site.eligible(el) && !el.parentElement?.closest(site.sel)
   const seen = new WeakSet()
   const scan = () => document.querySelectorAll(site.sel).forEach(el => {
     if (seen.has(el) || !eligible(el)) return

@@ -9,22 +9,37 @@ const { lastError } = await chrome.storage.session.get('lastError')
 const save = patch => { Object.assign(s, patch); chrome.storage.sync.set(patch); render() }
 const setFilters = fn => save({ filters: fn(s.filters) })
 
+const clone = id => $(id).content.firstElementChild.cloneNode(true)
+const toggle = (f, on) => setFilters(fs => fs.map(x => x.id === f.id ? { ...x, on } : x))
+const isTopic = f => f.id.startsWith('topic-')
+
+// Built-in filter: label + switch.
 function row(f) {
-  const li = $('#row').content.firstElementChild.cloneNode(true)
+  const li = clone('#row')
   const box = li.querySelector('input')
   box.checked = f.on
-  box.onchange = () => setFilters(fs => fs.map(x => x.id === f.id ? { ...x, on: box.checked } : x))
+  box.onchange = () => toggle(f, box.checked)
   li.querySelector('span').textContent = labelOf(f)
-  const rm = li.querySelector('.rm')
-  if (f.id.startsWith('topic-')) {
-    rm.setAttribute('aria-label', `Remove ${f.label}`)
-    rm.onclick = () => setFilters(fs => fs.filter(x => x.id !== f.id))
-  } else rm.remove()
+  return li
+}
+
+// Topic: a chip; click toggles it on/off, × removes it.
+function chip(f) {
+  const li = clone('#chip')
+  const [btn, rm] = li.querySelectorAll('button')
+  li.classList.toggle('off', !f.on)
+  btn.textContent = f.label
+  btn.title = f.on ? 'Click to pause this topic' : 'Paused: click to resume'
+  btn.setAttribute('aria-pressed', f.on)
+  btn.onclick = () => toggle(f, !f.on)
+  rm.setAttribute('aria-label', `Remove ${f.label}`)
+  rm.onclick = () => setFilters(fs => fs.filter(x => x.id !== f.id))
   return li
 }
 
 function render() {
-  $('#filters').replaceChildren(...s.filters.filter(f => !f.site).map(row))
+  $('#filters').replaceChildren(...s.filters.filter(f => !f.site && !isTopic(f)).map(row))
+  $('#topics').replaceChildren(...s.filters.filter(isTopic).map(chip))
   $('#linkedin').replaceChildren(...s.filters.filter(f => f.site === 'linkedin').map(row))
   $(`[name=strictness][value=${s.strictness}]`).checked = true
   $(`[name=matched][value=${s.matched}]`).checked = true
@@ -34,10 +49,21 @@ function render() {
 }
 
 function showStatus(error) {
-  const msg = !keys[s.provider] ? `Add ${a(PROVIDERS[s.provider].label)} API key below to start filtering.` : error
+  const missing = !keys[s.provider]
+  const msg = missing ? `Add ${a(PROVIDERS[s.provider].label)} API key to start →` : error
   $('#warn').textContent = msg ?? ''
   $('#warn').hidden = !msg
+  $('#warn').classList.toggle('action', missing)
+  $('#warn').tabIndex = missing ? 0 : -1
 }
+
+// The "add a key" banner jumps straight to the key field.
+$('#warn').onclick = () => {
+  if (!$('#warn').classList.contains('action')) return
+  $('#api').open = true
+  form.key.focus()
+}
+$('#warn').onkeydown = e => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), $('#warn').click())
 
 $('#add').onsubmit = e => {
   e.preventDefault()

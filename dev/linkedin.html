@@ -27,8 +27,8 @@
     import './stub.js'
     window.FEED_CONTROL_SITE = 'linkedin'
     const item = (n, inner) => `<div data-lazy-mount-id="lazy-${n}"><div data-display-contents="true"><div>${inner}</div></div></div>`
-    const post = ({ id, header, author, body, ad }) => `
-      <div role="listitem" componentkey="update-cardurn:li:activity:${id}">
+    const post = ({ id, header, author, body, ad, variant }) => `
+      <div role="listitem" componentkey="update-card${variant ? 'expanded' : ''}urn:li:activity:${id}${variant ? 'FeedType_MAIN_FEED_RELEVANCE' : ''}">
         ${header ? `<div data-view-name="feed-header-text">${header}</div>` : ''}
         <div data-view-name="feed-author-name">${author}</div>
         <button aria-label="Open control menu for post by ${author}">···</button>
@@ -42,9 +42,19 @@
       post({ id: 7004, header: 'Jane Doe likes this', author: 'Acme Corp', body: 'Acme Corp is hiring engineers in Toronto for our payments platform team.' }),
       `<section><h2>Jobs recommended for you</h2><div>Senior Engineer · Shopify · Remote</div></section>`,
       post({ id: 7005, author: 'Acme Cloud', body: 'Ship 10x faster with Acme Cloud. Start your free trial today.', ad: true }),
+      // LinkedIn keeps an "expanded" copy of a post and swaps it in on interaction.
+      post({ id: 7005, author: 'Acme Cloud', body: 'Ship 10x faster with Acme Cloud. Start your free trial today.', ad: true, variant: true }),
       post({ id: 7006, author: 'Lena Park', body: 'Here are 5 books recommended for you if you are getting into distributed systems: DDIA, …' }),
       post({ id: 7007, author: 'Marco Rossi', body: 'My team likes this approach to on-call: one week, then a full week off to recover.' }),
     ].map((html, i) => item(i, html)).join('')
+    // Mimic LinkedIn's copy swap: a capture-phase listener nothing can stop.
+    const [base, expanded] = [...document.querySelectorAll('[componentkey*="7005"]')].map(p => p.closest('[data-lazy-mount-id]'))
+    expanded.style.display = 'none'
+    document.addEventListener('click', e => {
+      if (!base.contains(e.target)) return
+      base.style.display = 'none'
+      expanded.style.display = ''
+    }, true)
     document.body.append(Object.assign(document.createElement('script'), { src: '../content.js' }))
   </script>
 </body>

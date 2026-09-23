@@ -2,7 +2,7 @@
 import { DEFAULTS, classify, pageFilters, topicId, withBuiltins } from '../lib.js'
 
 const store = {
-  sync: { filters: [...DEFAULTS.filters, { id: topicId('Sports'), label: 'Sports', on: true }] },
+  sync: { filters: [...DEFAULTS.filters, ...['Sports', 'Trump', 'influencers', 'claude code'].map(label => ({ id: topicId(label), label, on: label !== 'influencers' }))] },
   local: {},
   session: {},
 }
