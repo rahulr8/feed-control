@@ -32,7 +32,8 @@ const noul = (instructions, criteria) => ({ type: 'noul', instructions, ...(crit
 // [weight, question]; weights feed the default weighted mean.
 const BUILTIN = {
   slop: {
-    style: [2, noul('Is `post.body` written in the style of unedited chatbot output, such as bolded section headers, emoji bullet points, or stock phrases like "In conclusion", "Here\'s the thing", or "Let\'s dive in"?', {
+    // Text only reaches Jev as plain lines (no bold/markup), so ask about cues that survive extraction.
+    style: [2, noul('Is `post.body` written like formulaic chatbot output, with stock phrases such as "In conclusion", "Here\'s the thing", "Let\'s dive in", or "game-changer", emoji-led list lines, and a polished but impersonal tone?', {
       true: 'Reads like text pasted from a chatbot',
       false: 'Reads like a person wrote it, including well-organized human guides and non-native English',
     })],
@@ -40,22 +41,24 @@ const BUILTIN = {
       true: 'Vague and generic; could have been written by anyone',
       false: 'Contains specific personal or factual details',
     })],
-    bait: [0.5, noul('Does `post` end with a generic question meant to farm comments, such as "What do you think?" or "Thoughts?"')],
+    bait: [0.5, noul('Does `post` ask readers a generic engagement question, such as "What do you think?" or "Thoughts?", rather than a specific question the author needs answered?')],
   },
   stealth: {
-    promotes: [1, noul('Does `post` push readers toward a specific named product, service, app, or brand?', {
-      true: 'Advertises or recommends a specific product or brand to readers',
-      false: 'Mentions products only in passing, asks for neutral advice, or names none',
+    promotes: [1, noul('Does `post` pitch a specific named product, service, app, or brand to readers?', {
+      true: 'Pitches an offering: sells it, urges readers to try it, or lists its selling points',
+      false: 'Mentions products only in passing, shares an opinion or experience, asks for advice, or names none',
     })],
+    affiliated: [1, noul('Does the author of `post` say they are the maker, seller, employee, or affiliate of the product it mentions?')],
     disguised: [1, noul('Is `post` framed as a personal story, question, or recommendation request while steering readers toward a specific product?')],
-    cta: [1, noul('Does `post` ask readers to visit a link, use a discount code, sign up, or DM the author?')],
+    cta: [1, noul('Does `post` ask readers to buy, sign up for, or contact the author about a specific product, e.g. via a link, discount code, or DM?')],
   },
 }
 
 // Filters whose signals aren't interchangeable get their own rule instead of the weighted mean.
 const COMBINE = {
-  // Gate: nothing is an ad unless it promotes something. Open promotion scores 0.8x; disguise or a CTA lifts it to 1x.
-  stealth: a => a.promotes * Math.max(a.disguised, a.cta, 0.8),
+  // Gate: nothing is an ad unless it pitches something, and a pitch alone isn't enough
+  // (happy customers pitch too): it also needs affiliation, disguise, or a sales ask.
+  stealth: a => a.promotes * Math.max(a.affiliated, a.disguised, a.cta),
 }
 
 // Slop is judged on writing; title-only posts (images, links, video) give it nothing to judge.
@@ -74,7 +77,7 @@ const topic = label => ({
   })],
 })
 
-export const topicId = label => 'topic-' + label.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-')
+export const topicId = label => 'topic-' + label.toLowerCase().trim().replace(/\s+/g, ' ')
 
 const specs = f => BUILTIN[f.id] ?? (f.id.startsWith('topic-') ? topic(f.label) : {})
 
@@ -116,6 +119,13 @@ export function verdict(answers, filters, strictness = 'balanced') {
   return { label: describe(best.f, tier), score: best.score, tier }
 }
 
+// Short content hash (FNV-1a) so cached answers die when a post's text changes.
+export const fingerprint = obj => {
+  let h = 0x811c9dc5
+  for (const c of JSON.stringify(obj)) h = Math.imul(h ^ c.codePointAt(0), 0x01000193)
+  return (h >>> 0).toString(36)
+}
+
 // The whole decision for one post, shared by the extension, eval/run.js and the dev stub.
 // Callers own caching and transport: pass cached `answers` and an `ask(post, questions)` (omit to never ask).
 // Returns the verdict plus the merged answers; `asked` says whether new answers need caching.
@@ -136,13 +146,13 @@ const ERRORS = { 401: 'Invalid API key', 402: 'Out of credits', 403: 'API key no
 const RETRY = [429, 500, 502, 503, 524, 529]
 
 // One request per post, every question fanned out in it (docs.typesafe.ai/patterns/fan-out).
-export async function askJev({ apiKey, baseUrl }, post, questions) {
+export async function askJev({ apiKey, baseUrl, model = 'jev-latest' }, post, questions) {
   const ids = Object.keys(questions) // sent as q0, q1…: plain keys every API accepts
   for (let attempt = 0; ; attempt++) {
     const res = await fetch(`${baseUrl}/v1/systemone`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'jev-latest', state: { post }, questions: Object.fromEntries(ids.map((q, i) => [`q${i}`, questions[q]])) }),
+      body: JSON.stringify({ model, state: { post }, questions: Object.fromEntries(ids.map((q, i) => [`q${i}`, questions[q]])) }),
       signal: AbortSignal.timeout(10_000),
     })
     if (res.ok) {

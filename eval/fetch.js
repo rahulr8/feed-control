@@ -17,6 +17,9 @@ const decode = s => s
   .replace(/&#x([\da-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
   .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
 const text = html => decode(html.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim()
+// Match content.js: bodies keep one line per paragraph/list item/line break.
+const lines = html => decode(html.replace(/<(br|\/p|\/li|\/h\d)[^>]*>/g, '\n').replace(/<[^>]+>/g, ''))
+  .replace(/[ \t]+/g, ' ').replace(/ *\n[\n ]*/g, '\n').trim()
 const attr = (tag, name) => decode(tag.match(new RegExp(` ${name}="([^"]*)"`))?.[1] ?? '')
 
 // ponytail: regex over server-rendered HTML; breaks if Reddit changes markup, fine for a dev tool.
@@ -29,7 +32,7 @@ function parse(html) {
     return {
       id,
       title: attr(tag, 'post-title'),
-      body: text(body).slice(0, 1500),
+      body: lines(body).slice(0, 1500),
       subreddit: attr(tag, 'subreddit-prefixed-name'),
       flair: text(flair),
       link_domain: attr(tag, 'domain'),

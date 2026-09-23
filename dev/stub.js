@@ -15,7 +15,7 @@ const area = n => ({
 // Canned Jev answers per post id; everything unlisted answers 0.1.
 const CANNED = {
   t3_slop: { 'slop.style': 0.95, 'slop.no_specifics': 0.85, 'slop.bait': 0.9 },
-  t3_stealth: { 'stealth.promotes': 0.75, 'stealth.disguised': 0.6, 'stealth.cta': 0.3 },
+  t3_stealth: { 'stealth.promotes': 0.75, 'stealth.disguised': 0.8, 'stealth.cta': 0.3 },
   t3_sports: { 'topic-sports.match': 0.97 },
   t3_ok2: { 'topic-castles.match': 0.9 },
   // X fixture (dev/x.html)

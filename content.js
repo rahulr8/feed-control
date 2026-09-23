@@ -1,6 +1,9 @@
 // Scoped so a re-injection after an extension update can't collide with the orphaned copy.
 (() => {
   const text = el => el?.textContent.replace(/\s+/g, ' ').trim() ?? ''
+  // Bodies keep their line structure (lists, short punchy lines): slop cues live there.
+  const tidy = s => s.replace(/[ \t]+/g, ' ').replace(/ *\n[\n ]*/g, '\n').trim()
+  const lines = el => el ? tidy(el.innerText) : ''
   // Emoji are <img alt> on X; keep them, they're a slop signal.
   const richText = el => {
     if (!el) return ''
@@ -10,7 +13,7 @@
       if (n.nodeType === Node.TEXT_NODE) out.push(n.nodeValue)
       else if (n.localName === 'img') out.push(n.alt)
     }
-    return out.join('').replace(/\s+/g, ' ').trim()
+    return tidy(out.join(''))
   }
 
   // Per-site DOM knowledge. Everything else (classification, UI) is shared.
@@ -24,7 +27,7 @@
       promoted: el => el.localName === 'shreddit-ad-post',
       read: el => ({
         title: el.getAttribute('post-title') ?? '',
-        body: text(el.querySelector('[slot="text-body"]')).slice(0, 1500),
+        body: lines(el.querySelector('[slot="text-body"]')).slice(0, 1500),
         subreddit: el.getAttribute('subreddit-prefixed-name') ?? '',
         flair: text(el.querySelector('shreddit-post-flair')),
         link_domain: el.getAttribute('domain') ?? '',
@@ -60,11 +63,12 @@
   const verdicts = new Map() // id -> last verdict, re-applied instantly when X re-mounts a tweet
   const EYE_OFF = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.9 4.2A10.4 10.4 0 0 1 12 4c5 0 9 4.5 10 8a13 13 0 0 1-2.2 3.6M6.6 6.6A13 13 0 0 0 2 12c1 3.5 5 8 10 8a10 10 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2M2 2l20 20"/></svg>'
 
+  let generation = 0 // bumped on settings change; responses from older settings are dropped
   async function classify(el) {
-    const id = site.id(el)
+    const id = site.id(el), gen = generation
     try {
       const v = await chrome.runtime.sendMessage({ site: siteKey, id, promoted: site.promoted(el), post: site.read(el) })
-      if (v?.error || !el.isConnected || site.id(el) !== id || revealed.has(id)) return
+      if (v?.error || gen !== generation || !el.isConnected || site.id(el) !== id || revealed.has(id)) return
       verdicts.set(id, v)
       apply(el, v)
     } catch {
@@ -135,6 +139,7 @@
   // unless a new filter was added). Off-screen posts get re-checked when scrolled to.
   chrome.storage.onChanged.addListener((_, area) => {
     if (area === 'session') return
+    generation++
     verdicts.clear()
     document.querySelectorAll(site.sel).forEach(el => eligible(el) && !revealed.has(site.id(el)) && io.observe(el))
   })

@@ -1,4 +1,4 @@
-import { askJev, classify } from './lib.js'
+import { askJev, classify, fingerprint } from './lib.js'
 import { loadSettings } from './settings.js'
 
 chrome.runtime.onInstalled.addListener(async ({ reason }) => {
@@ -8,7 +8,9 @@ chrome.runtime.onInstalled.addListener(async ({ reason }) => {
   // Install/update orphans scripts in already-open Reddit/X tabs; attach fresh ones.
   const { content_scripts: [cs] } = chrome.runtime.getManifest()
   for (const tab of await chrome.tabs.query({ url: cs.matches })) {
-    chrome.scripting.executeScript({ target: { tabId: tab.id }, files: cs.js }).catch(() => {})
+    const target = { tabId: tab.id }
+    chrome.scripting.insertCSS({ target, files: cs.css }).catch(() => {})
+    chrome.scripting.executeScript({ target, files: cs.js }).catch(() => {})
   }
 })
 
@@ -29,11 +31,11 @@ function serial(id, fn) {
   return p
 }
 
-// Raw answers cached per post in session storage.
+// Raw answers cached per post + content fingerprint in session storage (an edited post is re-asked).
 // ponytail: 10MB, cleared on browser restart; wiped if it ever fills.
 async function handle(msg) {
   const s = await loadSettings()
-  const key = `a:${msg.site}:${msg.id}`
+  const key = `a:${msg.site}:${msg.id}:${fingerprint(msg.post)}`
   const cached = (await chrome.storage.session.get(key))[key]
   const ask = s.apiKey && ((post, qs) => askJev({ apiKey: s.apiKey, baseUrl: s.endpoint }, post, qs))
   const { verdict, answers, asked } = await classify(msg, s, { answers: cached, ask })

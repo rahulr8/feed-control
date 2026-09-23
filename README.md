@@ -22,7 +22,7 @@ Hide AI slop, ads & any topic on Reddit and X. A Chrome extension that blurs pro
 - Custom topics each add one question. Answers are cached per post for the browser session.
 - A confident match is collapsed and blurred; a borderline one is dimmed. Click to reveal.
 
-**Privacy:** the title, body (first 1500 chars), subreddit, flair, and link domain of each post you scroll past are sent to your chosen provider.
+**Privacy:** for each post you scroll past, its text is sent to your chosen provider: on Reddit the title, body (first 1500 chars), subreddit, flair and link domain; on X the author handle, text, quoted tweet text and link-card text. API keys stay in local browser storage and are never synced. The popup shows the same disclosure.
 
 ## Dev
 - `npm test`: scoring self-check.

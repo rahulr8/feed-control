@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { DEFAULTS, applies, classify, labelOf, questionsFor, score, verdict, topicId } from './lib.js'
+import { DEFAULTS, applies, classify, fingerprint, labelOf, questionsFor, score, verdict, topicId } from './lib.js'
 
 const sports = { id: topicId('Sports'), label: 'Sports', on: true }
 const filters = [...DEFAULTS.filters, sports]
@@ -18,12 +18,13 @@ assert.equal(verdict({ ...all(0.1), 'topic-sports.match': 0.6 }, filters, 'relax
 assert.equal(verdict({ ...all(0.9), 'topic-sports.match': 0.1 }, filters.map(f => ({ ...f, on: false }))), null)
 assert.equal(verdict({ 'slop.style': 0.9 }, filters), null, 'partial answers never trigger')
 
-// Stealth is gated on `promotes`: open ads still hide, CTAs/disguise alone never do.
+// Ads: a pitch plus affiliation, disguise, or a sales ask. A happy customer's pitch alone never hides.
 const stealth = { id: 'stealth' }
-const ad = (promotes, disguised, cta) => score(stealth, { 'stealth.promotes': promotes, 'stealth.disguised': disguised, 'stealth.cta': cta })
-assert.ok(ad(0.95, 0.1, 0.1) >= 0.75, 'blatant ad hides at balanced')
-assert.equal(ad(0.05, 0.9, 0.9) < 0.1, true, 'CTA without a product is not an ad')
-assert.ok(ad(0.9, 0.9, 0.1) > ad(0.9, 0.1, 0.1), 'disguise raises the score')
+const ad = (promotes, affiliated, disguised, cta) => score(stealth, { 'stealth.promotes': promotes, 'stealth.affiliated': affiliated, 'stealth.disguised': disguised, 'stealth.cta': cta })
+assert.ok(ad(0.95, 0.1, 0.1, 0.9) >= 0.75, 'pitch + sales ask hides at balanced')
+assert.ok(ad(0.95, 0.9, 0.1, 0.1) >= 0.75, 'founder self-promo hides')
+assert.ok(ad(0.95, 0.1, 0.1, 0.1) < 0.45, 'customer recommendation is not flagged, even at strict')
+assert.ok(ad(0.05, 0.9, 0.9, 0.9) < 0.1, 'no pitch, no ad')
 
 // Slop only judged on posts with real body text.
 assert.equal(applies({ id: 'slop' }, { body: 'short' }), false)
@@ -34,8 +35,12 @@ assert.equal(applies({ id: 'slop' }, { body: 'x'.repeat(80) }, 'reddit'), false)
 
 assert.equal(labelOf({ id: 'stealth', label: 'Stealth ad' }), 'Ads & self-promo', 'built-in renames reach saved filters')
 
-assert.equal(topicId('US  Politics!'), 'topic-us-politics-')
+assert.equal(topicId(' US  Politics '), 'topic-us politics')
 assert.equal(topicId('Fußball'), 'topic-fußball')
+assert.notEqual(topicId('C++'), topicId('C#'), 'punctuation is meaningful')
+
+assert.equal(fingerprint({ a: 1 }), fingerprint({ a: 1 }))
+assert.notEqual(fingerprint({ body: 'hi' }), fingerprint({ body: 'hi!' }), 'edited post = new cache entry')
 
 // classify(): the shared pipeline
 const settings = { filters, strictness: 'balanced' }
