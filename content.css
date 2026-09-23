@@ -31,8 +31,15 @@ article[data-feed-control="remove"] + hr { display: none; } /* Reddit's divider 
   place-items: center;
   cursor: pointer;
 }
-/* Bottom-right: clear of Reddit's Join and ⋯ buttons. */
-[data-feed-control="dim"] > .feed-control-pill { inset: auto 12px 10px auto; }
+/* Dim: an in-flow strip across the top of the post, in the site's own text color. */
+[data-feed-control="dim"] > .feed-control-pill { position: static; display: block; width: 100%; margin-bottom: 8px; } /* buttons shrink-wrap even as blocks */
+[data-feed-control="dim"] > .feed-control-pill > span {
+  display: flex; width: 100%; box-sizing: border-box; padding: 6px 10px; border-radius: 6px;
+  color: inherit; background: rgb(127 127 127 / .12); box-shadow: none; backdrop-filter: none;
+  font-weight: 500; opacity: .85;
+}
+[data-feed-control="dim"] > .feed-control-pill i { margin-left: auto; color: inherit; border-left: 0; text-decoration: underline; text-underline-offset: 2px; }
+[data-feed-control="dim"] > .feed-control-pill:hover > span { transform: none; opacity: 1; background: rgb(127 127 127 / .18); }
 
 .feed-control-pill > span {
   display: inline-flex;

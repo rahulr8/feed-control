@@ -19,6 +19,7 @@ const CANNED = {
   t3_sports: { 'topic-sports.match': 0.97 },
   t3_ok2: { 'topic-castles.match': 0.9 },
   // LinkedIn fixture (dev/linkedin.html)
+  'urn:li:activity:7008': { 'stealth.promotes': 0.75, 'stealth.affiliated': 0.8, 'stealth.disguised': 0.3, 'stealth.cta': 0.2 },
   'urn:li:activity:7002': { 'slop.style': 0.95, 'slop.no_specifics': 0.9, 'slop.bait': 0.95 },
   // X fixture (dev/x.html)
   1002: { 'slop.style': 0.9, 'slop.no_specifics': 0.9, 'slop.bait': 0.8 },
