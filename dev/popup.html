@@ -8,6 +8,8 @@
     const html = await (await fetch('options.html', { cache: 'no-store' })).text()
     document.body.innerHTML = new DOMParser().parseFromString(html, 'text/html').body.innerHTML
     await import(new URL('options.js', document.baseURI))
+    const focus = new URLSearchParams(location.search).get('focus')
+    if (focus) document.getElementById(focus)?.scrollIntoView({ block: 'start' })
   </script>
 </body>
 </html>

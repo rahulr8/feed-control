@@ -46,6 +46,7 @@ Deploy: `cd server && vercel deploy --prod`. The key lives only in the `OPENROUT
 ## Site notes
 - **LinkedIn** ships hashed class names and no `data-urn`; only `componentkey`, `data-view-name` and `data-testid` are stable. Selectors follow what LinkOff and Slop Mop verified live (Sept 2026). Module/header detection ("Suggested", "likes this", "Jobs recommended for you") matches English copy only.
 - `npm run zip`: store-ready package.
+- `npm run shots`: re-render the store screenshots (Playwright; needs the dev server).
 
 ## Eval (measure accuracy on real posts)
 1. `node eval/fetch.js`: pulls ~120 real posts into `eval/posts.json`.

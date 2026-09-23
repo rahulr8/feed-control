@@ -1,6 +1,6 @@
 # Chrome Web Store listing: copy-paste answers
 
-Upload: `npm run zip` → `feed-control.zip`. Images: `store/screenshot-*.png` (1280×800), `store/promo-tile.png` (440×280), `icons/128.png`.
+Upload: `npm run zip` → `feed-control.zip`. Images: `store/screenshot-1.png` … `-4.png` (1280×800, 24-bit PNG), `store/promo-tile.png` (440×280), `icons/128.png`. Regenerate after UI changes: `npm run shots` (with `python3 -m http.server 5178` running).
 
 ## Store listing tab
 

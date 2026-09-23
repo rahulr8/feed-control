@@ -5,3 +5,4 @@
 # Cached Jev answers from eval/run.js (derived; re-run to regenerate)
 eval/answers.json
 .vercel
+node_modules/

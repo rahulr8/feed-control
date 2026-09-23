@@ -3,33 +3,74 @@
 <head>
   <meta charset="utf-8">
   <title>Feed Control store screenshot</title>
-  <!-- Render: ?feed=linkedin|feed|x  → a 1280×800 store screenshot of the real extension on a mock feed + its popup. -->
+  <!-- ?v=1..4 → one 1280×800 Chrome Web Store screenshot: the real extension on a mock feed + its popup.
+       Render with `npm run shots` (needs the dev server: python3 -m http.server 5178). -->
   <style>
-    html, body { margin: 0; width: 1280px; height: 800px; overflow: hidden; font-family: system-ui, -apple-system, sans-serif; }
-    body { display: grid; grid-template-columns: 1fr 416px; background: linear-gradient(135deg, #1b1b3a, #2c2c6c); }
-    .feed { position: relative; margin: 28px 0 0 28px; border-radius: 12px 12px 0 0; overflow: hidden; box-shadow: 0 20px 60px rgb(0 0 0 / .45); }
-    .feed iframe { width: 100%; height: 100%; border: 0; }
-    aside { padding: 28px 28px 0 28px; display: grid; grid-template-rows: auto 1fr; gap: 16px; }
-    h1 { margin: 0; color: #fff; font-size: 26px; line-height: 1.2; letter-spacing: -.02em; }
-    h1 span { color: #a5a6ff; }
-    .popup { border-radius: 12px 12px 0 0; overflow: hidden; box-shadow: 0 20px 60px rgb(0 0 0 / .45); }
-    .popup iframe { width: 360px; height: 100%; border: 0; display: block; margin: 0 auto; background: #111114; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 1280px; height: 800px; overflow: hidden; font-family: -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body { position: relative; display: grid; grid-template-columns: 430px 1fr; background: radial-gradient(1200px 700px at 85% 10%, #3a3aa8 0%, transparent 60%), linear-gradient(160deg, #15152e 0%, #1f1f4d 100%); color: #fff; }
+
+    .copy { padding: 84px 36px 0 64px; display: grid; align-content: start; gap: 22px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; font-size: 17px; color: #d9d9ff; }
+    .brand img { width: 30px; height: 30px; border-radius: 8px; }
+    h1 { text-wrap: balance; margin: 6px 0 0; font-size: 44px; line-height: 1.08; letter-spacing: -.025em; font-weight: 750; }
+    h1 em { font-style: normal; color: #a9aaff; }
+    p { margin: 0; font-size: 18px; line-height: 1.5; color: #c8c8e8; max-width: 330px; }
+    ul { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+    li { display: flex; gap: 10px; align-items: center; font-size: 16px; color: #e6e6fa; }
+    li::before { content: ""; flex: none; width: 18px; height: 18px; border-radius: 50%; background: #6d6ef0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center / 12px no-repeat; }
+
+    /* Browser window with the feed */
+    .window { position: absolute; left: 470px; top: 56px; width: 760px; height: 700px; border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 30px 80px rgb(0 0 0 / .5), 0 0 0 1px rgb(255 255 255 / .08); }
+    .bar { height: 40px; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #e9e9ee; }
+    .dark .bar { background: #202024; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+    .dot + .dot { background: #febc2e; } .dot + .dot + .dot { background: #28c840; }
+    .url { margin-left: 14px; flex: 1; max-width: 360px; height: 24px; border-radius: 7px; background: #fff; color: #555; font-size: 12px; display: flex; align-items: center; padding: 0 10px; }
+    .dark .url { background: #34343a; color: #bbb; }
+    .ext { margin-left: auto; width: 22px; height: 22px; border-radius: 6px; outline: 2px solid #6d6ef0; outline-offset: 2px; }
+    .feed { width: 1013px; height: 880px; border: 0; transform: scale(.75); transform-origin: 0 0; }
+
+    /* Popup, anchored under the extension icon */
+    .popup { background: #111114; position: absolute; right: 36px; top: 108px; width: 324px; height: 520px; border-radius: 12px; overflow: hidden; box-shadow: 0 24px 60px rgb(0 0 0 / .55), 0 0 0 1px rgb(255 255 255 / .1); }
+    .popup iframe { width: 360px; height: 578px; border: 0; transform: scale(.9); transform-origin: 0 0; background: #111114; }
   </style>
 </head>
 <body>
-  <div class="feed"><iframe id="feed"></iframe></div>
-  <aside>
-    <h1 id="title"></h1>
-    <div class="popup"><iframe src="../dev/popup.html"></iframe></div>
-  </aside>
+  <section class="copy">
+    <div class="brand"><img src="../icons/128.png" alt="">Feed Control</div>
+    <h1 id="h"></h1>
+    <p id="p"></p>
+    <ul id="b"></ul>
+  </section>
+  <div class="window" id="w">
+    <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url" id="u"></span><img class="ext" src="../icons/128.png" alt=""></div>
+    <iframe class="feed" id="f"></iframe>
+  </div>
+  <div class="popup"><iframe id="pp"></iframe></div>
   <script>
-    const which = new URLSearchParams(location.search).get('feed') ?? 'linkedin'
-    document.getElementById('feed').src = `../dev/${which === 'linkedin' ? 'linkedin' : which === 'x' ? 'x' : 'feed'}.html`
-    document.getElementById('title').innerHTML = {
-      linkedin: 'Hide <span>suggested posts, ads & AI slop</span> on LinkedIn',
-      feed: 'Hide <span>any topic</span> you choose on Reddit',
-      x: 'Hide <span>AI reply-guy slop</span> on X',
-    }[which]
+    const SHOTS = {
+      1: { feed: 'linkedin', url: 'linkedin.com/feed', focus: '',
+           h: 'A calmer feed, <em>automatically</em>', p: 'Feed Control hides AI slop, ads and anything you choose, on Reddit, X and LinkedIn.',
+           b: ['Works out of the box', 'No account, no API key', 'One click to show any post'] },
+      2: { feed: 'feed', url: 'reddit.com', dark: true, focus: 'h-topics',
+           h: 'Hide <em>any topic</em> in plain words', p: 'Type "Trump", "sports" or "crypto". An AI model understands what counts, not just keywords.',
+           b: ['Topics you can pause or remove', 'Catches related news and people', 'Leaves posts alone when unsure'] },
+      3: { feed: 'linkedin', url: 'linkedin.com/feed', focus: 'h-linkedin',
+           h: 'LinkedIn, <em>decluttered</em>', p: 'Suggested posts, job and people recommendations, sidebar news and Premium upsells: gone.',
+           b: ['Promoted posts hidden', 'AI slop filtered too', 'Each rule has its own switch'] },
+      4: { feed: 'x', url: 'x.com/home', dark: true, focus: 'h-behavior',
+           h: 'Blur it or <em>remove it</em>', p: 'Hidden posts collapse behind a small label. Prefer them gone? Switch to Remove.',
+           b: ['Relaxed, Balanced or Strict', 'No tracking, nothing stored', 'Open source'] },
+    }
+    const s = SHOTS[new URLSearchParams(location.search).get('v') ?? 1]
+    document.getElementById('h').innerHTML = s.h
+    document.getElementById('p').textContent = s.p
+    document.getElementById('b').innerHTML = s.b.map(x => `<li>${x}</li>`).join('')
+    document.getElementById('u').textContent = s.url
+    document.getElementById('w').classList.toggle('dark', !!s.dark)
+    document.getElementById('f').src = `../dev/${s.feed}.html`
+    document.getElementById('pp').src = `../dev/popup.html?focus=${s.focus}`
   </script>
 </body>
 </html>
