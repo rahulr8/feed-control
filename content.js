@@ -106,7 +106,6 @@
 
   const revealed = new Set()
   const verdicts = new Map() // id -> last verdict, re-applied instantly when X re-mounts a tweet
-  const HALF = '<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>'
   const EYE_OFF = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.9 4.2A10.4 10.4 0 0 1 12 4c5 0 9 4.5 10 8a13 13 0 0 1-2.2 3.6M6.6 6.6A13 13 0 0 0 2 12c1 3.5 5 8 10 8a10 10 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2M2 2l20 20"/></svg>'
 
   let generation = 0 // bumped on settings change; responses from older settings are dropped
@@ -134,18 +133,10 @@
     pill.type = 'button'
     pill.className = 'feed-control-pill'
     pill.setAttribute('aria-label', `${label}. Show post`)
-    const pct = score == null ? '' : ` (${Math.round(score * 100)}% match)`
+    pill.title = `Hidden by Feed Control${score == null ? '' : ` (${Math.round(score * 100)}% match)`}. Click to show.`
     const chip = pill.appendChild(document.createElement('span'))
-    if (tier === 'hide') {
-      pill.title = `Hidden by Feed Control${pct}. Click to show.`
-      chip.innerHTML = EYE_OFF
-      chip.append(label)
-    } else {
-      // Borderline: an inline strip at the top of the post that says what happened, not a floating chip.
-      pill.title = `Feed Control dimmed this post${pct}: not sure enough to hide it. Click to show it normally.`
-      chip.innerHTML = HALF
-      chip.append(`Dimmed · ${label[0].toLowerCase()}${label.slice(1)}`)
-    }
+    chip.innerHTML = EYE_OFF
+    chip.append(label)
     chip.appendChild(document.createElement('i')).textContent = 'Show'
     // Sites act on pointerdown/mousedown too (LinkedIn ad tracking, X navigation): keep all of them to ourselves.
     for (const type of ['pointerdown', 'mousedown', 'pointerup', 'mouseup']) pill.addEventListener(type, e => e.stopPropagation())
@@ -155,7 +146,7 @@
       reveal(site.id(el))
     }
     host.prepend(pill)
-    setInert(host, tier === 'hide')
+    setInert(host, true)
   }
 
   // Reveal every rendering of the post: LinkedIn keeps up to 3 copies and swaps them on interaction,

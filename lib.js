@@ -40,8 +40,8 @@ const forSite = (f, site) => !f.site || f.site === site
 // Page-level filters (not tied to a post) that are on for this site, e.g. LinkedIn's sidebar clutter.
 export const pageFilters = ({ filters }, site) => filters.filter(f => f.on && f.page && forSite(f, site)).map(f => f.id)
 
-// [hide, dim] thresholds on a filter's 0–1 score
-export const STRICTNESS = { relaxed: [0.85, 0.7], balanced: [0.75, 0.55], strict: [0.6, 0.45] }
+// Minimum 0–1 score to act on a post. Below it the post is left untouched: when unsure, do nothing.
+export const STRICTNESS = { relaxed: 0.85, balanced: 0.75, strict: 0.6 }
 
 const noul = (instructions, criteria) => ({ type: 'noul', instructions, ...(criteria && { criteria }) })
 
@@ -114,29 +114,27 @@ export function score(f, answers) {
   return spec.reduce((s, [q, [w]]) => s + w * a[q], 0) / weight
 }
 
-// What the user sees on a hidden post: [confident, borderline].
+// What the user sees on a hidden post.
 const PHRASES = {
-  promoted: ['Promoted post'],
-  suggested: ['Suggested post'],
-  activity: ['Shown via network activity'],
-  recommendations: ['LinkedIn recommendation'],
-  slop: ['Likely AI slop', 'Possibly AI slop'],
-  stealth: ['Likely promotional', 'Possibly promotional'],
+  promoted: 'Promoted post',
+  suggested: 'Suggested post',
+  activity: 'Shown via network activity',
+  recommendations: 'LinkedIn recommendation',
+  slop: 'Likely AI slop',
+  stealth: 'Likely promotional',
 }
-export const describe = (f, tier) =>
-  PHRASES[f.id]?.[tier === 'hide' ? 0 : 1] ?? `${tier === 'hide' ? 'About' : 'Possibly about'} ${f.label}`
+export const describe = f => PHRASES[f.id] ?? `About ${f.label}`
 
-// Highest-scoring enabled filter wins; tier from strictness thresholds.
+// Highest-scoring enabled filter wins, if it clears the strictness threshold.
 export function verdict(answers, filters, strictness = 'balanced') {
-  const [hide, dim] = STRICTNESS[strictness] ?? STRICTNESS.balanced
+  const min = STRICTNESS[strictness] ?? STRICTNESS.balanced
   let best = null
   for (const f of filters) {
     const s = f.on ? score(f, answers) : null
     if (s != null && (!best || s > best.score)) best = { f, score: s }
   }
-  if (!best || best.score < dim) return null
-  const tier = best.score >= hide ? 'hide' : 'dim'
-  return { label: describe(best.f, tier), score: best.score, tier }
+  if (!best || best.score < min) return null
+  return { label: describe(best.f), score: best.score, tier: 'hide' }
 }
 
 // Short content hash (FNV-1a) so cached answers die when a post's text changes.
@@ -151,11 +149,11 @@ export const fingerprint = obj => {
 // Returns the verdict plus the merged answers; `asked` says whether new answers need caching.
 // `facts`: FACTS ids the page's markup proved for this post (e.g. ['promoted'], ['suggested']).
 export async function classify({ site, facts = [], post }, { filters, strictness, matched }, { answers = {}, ask } = {}) {
-  // 'remove' only upgrades confident hides; borderline (dim) posts are never silently erased.
+  // Matched posts are collapsed behind a label ('hide') or, in remove mode, gone entirely.
   const style = v => v?.tier === 'hide' && matched === 'remove' ? { ...v, tier: 'remove' } : v
   const active = filters.filter(f => f.on && forSite(f, site) && applies(f, post, site))
   const fact = active.find(f => facts.includes(f.id))
-  if (fact) return { verdict: style({ label: describe(fact, 'hide'), tier: 'hide' }), answers, asked: false }
+  if (fact) return { verdict: style({ label: describe(fact), tier: 'hide' }), answers, asked: false }
   // Ads are never judged by Jev, even when the Promoted filter is off.
   if (facts.includes('promoted') || !post.body && !post.title) return { verdict: null, answers, asked: false }
   // Only questions not answered yet, e.g. a newly added topic.

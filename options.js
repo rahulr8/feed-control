@@ -44,8 +44,8 @@ function render() {
   $(`[name=strictness][value=${s.strictness}]`).checked = true
   $(`[name=matched][value=${s.matched}]`).checked = true
   $('#matchedNote').textContent = s.matched === 'remove'
-    ? 'Confident matches disappear. Borderline ones are still dimmed and labeled.'
-    : 'Confident matches collapse behind a label; click Show to see them.'
+    ? 'Matched posts disappear. Posts Feed Control is unsure about are left alone.'
+    : 'Matched posts collapse behind a label; click Show to see them. Posts Feed Control is unsure about are left alone.'
 }
 
 function showStatus(error) {

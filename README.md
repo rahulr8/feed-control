@@ -21,7 +21,7 @@ Hide AI slop, ads & any topic on Reddit, X and LinkedIn. A Chrome extension that
 - Site-specific DOM reading lives in `SITES` in `content.js`; everything else is shared. X is a virtualized React list, so verdicts are remembered per tweet id and re-applied instantly when a tweet re-mounts.
 - Every other post gets one Jev request, with all questions fanned out in it. Each filter is a set of yes/no questions whose answers are combined with weights in code (`lib.js`).
 - Custom topics each add one question. Answers are cached per post for the browser session.
-- A confident match is collapsed and blurred; a borderline one is dimmed. Click to reveal.
+- A confident match is collapsed and blurred (or removed, if you choose). Anything below the strictness threshold is left untouched. Click to reveal.
 
 **Privacy:** for each post you scroll past, its text is sent to your chosen provider: on Reddit the title, body (first 1500 chars), subreddit, flair and link domain; on X the author handle, text, quoted tweet text and link-card text. API keys stay in local browser storage and are never synced. The popup shows the same disclosure.
 

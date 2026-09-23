@@ -11,9 +11,9 @@ assert.ok(!Object.keys(qs).some(q => q.startsWith('promoted.')), 'promoted is co
 const all = v => Object.fromEntries(Object.keys(qs).map(q => [q, v]))
 assert.equal(verdict(all(0.1), filters), null)
 assert.equal(verdict({ ...all(0.1), 'topic-sports.match': 0.9 }, filters).label, 'About Sports')
-assert.equal(verdict({ ...all(0.1), 'topic-sports.match': 0.6 }, filters).label, 'Possibly about Sports')
 assert.equal(verdict({ ...all(0.1), 'slop.style': 1, 'slop.no_specifics': 1, 'slop.bait': 1 }, filters).label, 'Likely AI slop')
-assert.equal(verdict({ ...all(0.1), 'topic-sports.match': 0.6 }, filters).tier, 'dim')
+assert.equal(verdict({ ...all(0.1), 'topic-sports.match': 0.6 }, filters), null, 'unsure: left untouched')
+assert.equal(verdict({ ...all(0.1), 'topic-sports.match': 0.6 }, filters, 'strict').tier, 'hide', 'strict acts on less certainty')
 assert.equal(verdict({ ...all(0.1), 'topic-sports.match': 0.6 }, filters, 'relaxed'), null)
 assert.equal(verdict({ ...all(0.9), 'topic-sports.match': 0.1 }, filters.map(f => ({ ...f, on: false }))), null)
 assert.equal(verdict({ 'slop.style': 0.9 }, filters), null, 'partial answers never trigger')
@@ -66,11 +66,11 @@ assert.deepEqual(calls[0], ['topic-cats.match'], 'new topic asks only its own qu
 r = await classify({ site: 'reddit', post }, withTopic, {})
 assert.equal(r.verdict, null); assert.equal(r.asked, false, 'no key: nothing asked, nothing hidden')
 
-// matched: 'remove' upgrades confident hides only; dims stay visible.
+// matched: 'remove' upgrades hides to removal; unsure posts stay untouched.
 const sportsAsk = v => async (_, q) => Object.fromEntries(Object.keys(q).map(k => [k, k === 'topic-sports.match' ? v : 0.1]))
 const removeMode = { filters, strictness: 'balanced', matched: 'remove' }
 assert.equal((await classify({ site: 'reddit', post }, removeMode, { ask: sportsAsk(0.9) })).verdict.tier, 'remove')
-assert.equal((await classify({ site: 'reddit', post }, removeMode, { ask: sportsAsk(0.6) })).verdict.tier, 'dim', 'borderline never removed')
+assert.equal((await classify({ site: 'reddit', post }, removeMode, { ask: sportsAsk(0.6) })).verdict, null, 'unsure posts untouched in remove mode too')
 assert.equal((await classify({ site: 'reddit', facts: ['promoted'], post }, removeMode)).verdict.tier, 'remove')
 assert.equal((await classify({ site: 'reddit', post }, settings, { ask: sportsAsk(0.9) })).verdict.tier, 'hide', 'blur is the default')
 

@@ -67,16 +67,16 @@ for (const [labelKey, f] of FILTERS) {
   console.log(`## ${f.label}  (${rows.length} judged, ${all.length - rows.length} not applicable, ${pos} labeled yes)`)
   if (!pos) { console.log('  no positive labels, nothing to measure\n'); continue }
 
-  console.log('  preset      hidden  wrong  precision (≥95% sure)   dimmed  wrong  missed  recall')
-  for (const [name, [hide, dim]] of Object.entries(STRICTNESS)) {
-    const H = rows.filter(r => r.s >= hide), D = rows.filter(r => r.s >= dim && r.s < hide)
+  console.log('  preset      hidden  wrong  precision (≥95% sure)   missed  recall')
+  for (const [name, hide] of Object.entries(STRICTNESS)) {
+    const H = rows.filter(r => r.s >= hide)
     const hitsH = H.filter(r => r.y).length
-    const missed = rows.filter(r => r.y && r.s < dim).length + skipped
+    const missed = rows.filter(r => r.y && r.s < hide).length + skipped
     const left = `  ${name.padEnd(10)} ${String(H.length).padStart(6)} ${String(H.length - hitsH).padStart(6)}  ${pct(hitsH / H.length).padStart(5)} (≥${pct(lower(hitsH, H.length))})`
-    console.log(`${left.padEnd(50)}${String(D.length).padStart(6)} ${String(D.filter(r => !r.y).length).padStart(6)} ${String(missed).padStart(7)}  ${pct((pos - missed) / pos).padStart(5)}`)
+    console.log(`${left.padEnd(50)}${String(missed).padStart(6)}  ${pct((pos - missed) / pos).padStart(5)}`)
   }
 
-  // Lowest cut-off on the tune half whose flagged set (3+) is ≥90% / ≥75% correct, then checked on the test half.
+  // Lowest cut-off on the tune half whose flagged set (3+) is ≥90% correct, then checked on the test half.
   const cut = (set, target) => [...new Set(set.map(r => r.s))].sort((a, b) => a - b).find(t => {
     const fl = set.filter(r => r.s >= t)
     return fl.length >= 3 && fl.filter(r => r.y).length / fl.length >= target
@@ -87,13 +87,12 @@ for (const [labelKey, f] of FILTERS) {
     return `${t.toFixed(2)} → on held-out half: ${fl.length} flagged, precision ${pct(k / fl.length)} (≥${pct(lower(k, fl.length))})`
   }
   const tune = rows.filter(r => half(r.p) === 'tune')
-  console.log(`  suggested hide ${check(cut(tune, 0.9))}`)
-  console.log(`  suggested dim  ${check(cut(tune, 0.75))}`)
+  console.log(`  suggested threshold ${check(cut(tune, 0.9))}`)
 
-  const [, dim] = STRICTNESS.balanced
+  const min = STRICTNESS.balanced
   const bad = [
-    ...rows.filter(r => !r.y && r.s >= dim).sort((a, b) => b.s - a.s).map(r => `  ✗ flagged ${r.s.toFixed(2)}  ${short(r.p.title)}  [${r.p.subreddit}]`),
-    ...rows.filter(r => r.y && r.s < dim).sort((a, b) => a.s - b.s).map(r => `  ○ missed  ${r.s.toFixed(2)}  ${short(r.p.title)}  [${r.p.subreddit}]`),
+    ...rows.filter(r => !r.y && r.s >= min).sort((a, b) => b.s - a.s).map(r => `  ✗ flagged ${r.s.toFixed(2)}  ${short(r.p.title)}  [${r.p.subreddit}]`),
+    ...rows.filter(r => r.y && r.s < min).sort((a, b) => a.s - b.s).map(r => `  ○ missed  ${r.s.toFixed(2)}  ${short(r.p.title)}  [${r.p.subreddit}]`),
     ...all.filter(r => r.y && r.s == null).map(r => `  ○ skipped (filter can't judge it)  ${short(r.p.title)}`),
   ]
   if (bad.length) console.log('  errors at balanced:\n' + bad.slice(0, 12).join('\n'))
@@ -101,7 +100,7 @@ for (const [labelKey, f] of FILTERS) {
 }
 
 // What the user actually experiences: a post is hidden if ANY enabled filter hides it.
-const [hide] = STRICTNESS.balanced
+const hide = STRICTNESS.balanced
 const wanted = p => FILTERS.some(([k]) => p.labels[k])
 const hidden = results.filter(({ a }) => FILTERS.some(([, f]) => (score(f, a) ?? 0) >= hide))
 const wrong = hidden.filter(({ p }) => !wanted(p))
